@@ -2,1570 +2,1809 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Steam — ZoVbomb</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Pmdrk 1 — Выпуск от 17 июня 2026 · PMDRK presents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-:root {
-  --bg-darkest: #10151c;
-  --bg-dark: #171a21;
-  --bg-main: #1b2838;
-  --bg-card: #2a3f5a;
-  --accent: #67c1f5;
-  --green: #75b022;
-  --green-dark: #588a1b;
-  --green-hover: #a4d007;
-  --text: #c7d5e0;
-  --text-dim: #8f98a0;
-  --text-bright: #ffffff;
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'Inter', Arial, sans-serif;
-  background: var(--bg-dark);
-  color: var(--text);
-  height: 100vh;
-  overflow: hidden;
-  font-size: 13px;
-  -webkit-font-smoothing: antialiased;
-}
-
-/* ============ HEADER ============ */
-.steam-header {
-  background: linear-gradient(to bottom, #171a21 0%, #1b2838 100%);
-  height: 52px;
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  border-bottom: 1px solid #000;
-  gap: 28px;
-  position: relative;
-  z-index: 100;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: 1.5px;
-}
-
-.logo-icon {
-  width: 28px; height: 28px;
-  background: linear-gradient(135deg, #1a9fff 0%, #13577e 100%);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-}
-
-.menu-items {
-  display: flex;
-  gap: 24px;
-  font-size: 13px;
-}
-
-.menu-item {
-  cursor: pointer;
-  padding: 18px 0;
-  position: relative;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 500;
-  color: #dcdedf;
-  transition: color .2s;
-}
-.menu-item:hover { color: #fff; }
-.menu-item.active { color: #fff; }
-.menu-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: -1px; left: -4px; right: -4px;
-  height: 2px;
-  background: linear-gradient(to right, #1a9fff 0%, #13577e 100%);
-}
-
-.header-right {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-  font-size: 11px;
-  color: #b8b6b6;
-}
-
-.header-icon {
-  width: 32px; height: 32px;
-  display: flex; align-items: center; justify-content: center;
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background .2s;
-}
-.header-icon:hover { background: rgba(255,255,255,0.08); }
-
-.user-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 4px 10px 4px 4px;
-  background: rgba(0,0,0,0.3);
-  border-radius: 2px;
-  cursor: pointer;
-  transition: background .2s;
-}
-.user-pill:hover { background: rgba(0,0,0,0.5); }
-.user-avatar {
-  width: 26px; height: 26px;
-  background: linear-gradient(135deg, #588a1b, #3a5a0e);
-  border-radius: 2px;
-}
-.user-name { color: #beedfd; font-weight: 500; }
-
-/* ============ APP LAYOUT ============ */
-.app {
-  display: grid;
-  grid-template-columns: 244px 1fr 300px;
-  height: calc(100vh - 52px);
-}
-
-/* ============ GAMES SIDEBAR ============ */
-.games-sidebar {
-  background: var(--bg-main);
-  border-right: 1px solid #000;
-  overflow-y: auto;
-  padding: 12px 0 60px;
-}
-
-.sidebar-header {
-  padding: 6px 16px 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.sidebar-header-title {
-  font-size: 11px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-}
-.add-btn {
-  width: 22px; height: 22px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  color: var(--text-dim);
-  border-radius: 2px;
-  transition: all .2s;
-}
-.add-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
-
-.search-box {
-  margin: 0 12px 14px;
-  background: #316373;
-  border-radius: 2px;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.search-box input {
-  background: transparent;
-  border: none;
-  color: var(--text-bright);
-  font-size: 12px;
-  width: 100%;
-  outline: none;
-  font-family: inherit;
-}
-.search-box input::placeholder { color: rgba(255,255,255,0.5); }
-
-.games-list-section-title {
-  padding: 12px 16px 6px;
-  font-size: 10px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 700;
-}
-
-.game-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 5px 16px;
-  cursor: pointer;
-  position: relative;
-  font-size: 12px;
-  color: var(--text);
-  transition: background .15s;
-}
-.game-item:hover { background: rgba(255,255,255,0.04); color: #fff; }
-.game-item.active {
-  background: linear-gradient(to right, rgba(103,193,245,0.18) 0%, rgba(103,193,245,0.05) 100%);
-  color: #fff;
-}
-.game-item.active::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 3px;
-  background: var(--accent);
-}
-
-.game-thumb {
-  width: 34px; height: 34px;
-  background: #000;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.game-name {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.game-status {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-.game-status.playing { background: var(--green-hover); box-shadow: 0 0 6px var(--green-hover); }
-.game-status.update { background: var(--accent); }
-
-/* ============ MAIN CONTENT ============ */
-.main-content {
-  background: var(--bg-main);
-  overflow-y: auto;
-  position: relative;
-}
-
-/* Hero */
-.game-hero {
-  position: relative;
-  height: 460px;
-  background: #000;
-  overflow: hidden;
-}
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  background-image: url('https://picsum.photos/seed/zovbomb-hero-arena/1600/600.jpg');
-  background-size: cover;
-  background-position: center;
-  filter: brightness(0.55) contrast(1.1) saturate(1.2);
-  transform: scale(1.05);
-  animation: heroZoom 30s ease-in-out infinite alternate;
-}
-@keyframes heroZoom {
-  0% { transform: scale(1.05) translateX(0); }
-  100% { transform: scale(1.15) translateX(-2%); }
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 30% 40%, rgba(255,68,68,0.15) 0%, transparent 50%),
-    linear-gradient(to bottom, rgba(27,40,56,0.3) 0%, rgba(27,40,56,0.6) 60%, rgba(16,21,28,1) 100%);
-}
-
-.hero-content {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 24px 36px 28px;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(0,0,0,0.6);
-  border: 1px solid rgba(255,68,68,0.4);
-  padding: 3px 10px;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #ff6b6b;
-  margin-bottom: 10px;
-  border-radius: 2px;
-  font-weight: 600;
-}
-
-.game-title {
-  font-size: 42px;
-  font-weight: 800;
-  color: #fff;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.9);
-  letter-spacing: 2px;
-  line-height: 1;
-  margin-bottom: 4px;
-}
-.game-title .accent { color: #ff4444; }
-
-.game-subtitle {
-  font-size: 13px;
-  color: rgba(255,255,255,0.7);
-  margin-bottom: 18px;
-  letter-spacing: 0.5px;
-}
-
-/* Play controls */
-.play-controls {
-  display: flex;
-  gap: 4px;
-  align-items: stretch;
-  margin-bottom: 14px;
-  width: fit-content;
-}
-
-.play-button {
-  background: linear-gradient(to bottom, #75b022 5%, #588a1b 95%);
-  color: #d2efa9;
-  border: none;
-  padding: 0 32px;
-  font-size: 15px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-family: inherit;
-  min-width: 220px;
-  justify-content: center;
-  position: relative;
-  height: 44px;
-  transition: all .15s;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
-}
-.play-button:hover {
-  background: linear-gradient(to bottom, #8ed629 5%, #6aa321 95%);
-  color: #fff;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(117,176,34,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
-}
-.play-button:active { transform: translateY(0); }
-
-.play-dropdown {
-  background: linear-gradient(to bottom, #75b022 5%, #588a1b 95%);
-  color: #d2efa9;
-  padding: 0 14px;
-  cursor: pointer;
-  border: none;
-  border-left: 1px solid rgba(0,0,0,0.4);
-  font-family: inherit;
-  display: flex;
-  align-items: center;
-  transition: background .15s;
-}
-.play-dropdown:hover { background: #6aa321; color: #fff; }
-
-/* Update banner */
-.update-banner {
-  background: linear-gradient(to right, rgba(103,193,245,0.25) 0%, rgba(103,193,245,0.05) 100%);
-  border-left: 3px solid var(--accent);
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  font-size: 12px;
-  max-width: 700px;
-  cursor: pointer;
-  transition: background .2s;
-}
-.update-banner:hover { background: linear-gradient(to right, rgba(103,193,245,0.35) 0%, rgba(103,193,245,0.1) 100%); }
-
-.update-banner-icon {
-  flex-shrink: 0;
-  width: 32px; height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(103,193,245,0.2);
-  border-radius: 50%;
-}
-
-.update-banner-text { flex: 1; }
-.update-banner-label {
-  color: var(--accent);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 11px;
-}
-.update-banner-title { color: #fff; font-weight: 600; margin-top: 2px; }
-
-.update-banner-cta {
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  white-space: nowrap;
-}
-
-/* Stats bar */
-.game-stats {
-  display: flex;
-  gap: 28px;
-  padding: 14px 36px;
-  background: rgba(0,0,0,0.35);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 12px;
-  align-items: center;
-}
-.stat-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-dim);
-}
-.stat-item strong { color: #fff; font-weight: 600; }
-
-/* Tabs */
-.tabs {
-  display: flex;
-  background: rgba(0,0,0,0.25);
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  padding: 0 36px;
-}
-.tab {
-  padding: 14px 20px;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  color: var(--text-dim);
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  font-weight: 600;
-  transition: all .15s;
-  position: relative;
-}
-.tab:hover { color: #fff; }
-.tab.active {
-  color: #fff;
-  border-bottom-color: var(--accent);
-}
-
-/* ============ NEWS SECTION ============ */
-.news-section {
-  padding: 24px 36px;
-}
-
-.section-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 16px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.section-title a {
-  color: var(--accent);
-  font-size: 11px;
-  text-decoration: none;
-  font-weight: 500;
-  text-transform: none;
-}
-.section-title a:hover { color: #fff; }
-
-.news-card {
-  background: rgba(0,0,0,0.35);
-  border: 1px solid rgba(255,255,255,0.06);
-  margin-bottom: 10px;
-  display: flex;
-  gap: 0;
-  cursor: pointer;
-  transition: all .2s;
-  overflow: hidden;
-}
-.news-card:hover {
-  background: rgba(103,193,245,0.08);
-  border-color: rgba(103,193,245,0.3);
-}
-
-.news-image {
-  width: 220px;
-  height: 130px;
-  background: #000;
-  flex-shrink: 0;
-  position: relative;
-  overflow: hidden;
-}
-.news-image img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform .4s;
-}
-.news-card:hover .news-image img { transform: scale(1.05); }
-
-.news-tag {
-  position: absolute;
-  top: 8px; left: 8px;
-  background: var(--accent);
-  color: #000;
-  padding: 2px 8px;
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.news-tag.update { background: #ff6b6b; color: #fff; }
-.news-tag.event { background: var(--green-hover); color: #000; }
-
-.news-content {
-  padding: 14px 18px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.news-title {
-  font-size: 15px;
-  color: var(--accent);
-  font-weight: 600;
-  margin-bottom: 4px;
-  line-height: 1.3;
-}
-.news-card:hover .news-title { color: #fff; }
-
-.news-date {
-  font-size: 11px;
-  color: var(--text-dim);
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.news-excerpt {
-  font-size: 12px;
-  color: var(--text);
-  line-height: 1.6;
-  flex: 1;
-}
-
-.news-footer {
-  margin-top: 8px;
-  display: flex;
-  gap: 16px;
-  font-size: 11px;
-  color: var(--text-dim);
-}
-.news-footer-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* About section */
-.about-section {
-  padding: 24px 36px 40px;
-}
-
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 28px;
-}
-
-.about-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--text);
-}
-.about-desc p { margin-bottom: 12px; }
-.about-desc strong { color: #fff; }
-.about-desc ul { margin: 8px 0 12px 20px; line-height: 1.9; }
-.about-desc li { color: var(--text); }
-.about-desc li::marker { color: var(--accent); }
-
-.side-info {
-  background: rgba(0,0,0,0.35);
-  padding: 18px;
-  font-size: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
-  height: fit-content;
-}
-
-.side-info-title {
-  font-size: 11px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 12px;
-  font-weight: 700;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.side-info-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
-  color: var(--text-dim);
-  gap: 12px;
-}
-.side-info-row span:last-child { color: #fff; text-align: right; }
-
-.tag {
-  display: inline-block;
-  background: rgba(103,193,245,0.12);
-  color: var(--accent);
-  padding: 3px 10px;
-  font-size: 11px;
-  margin: 2px 2px 2px 0;
-  cursor: pointer;
-  transition: all .15s;
-  border-radius: 1px;
-}
-.tag:hover { background: var(--accent); color: #000; }
-
-/* ============ RIGHT SIDEBAR ============ */
-.right-sidebar {
-  background: var(--bg-main);
-  border-left: 1px solid #000;
-  overflow-y: auto;
-  padding: 18px 16px 60px;
-}
-
-.sidebar-section { margin-bottom: 28px; }
-
-.sidebar-section-title {
-  font-size: 11px;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 1.2px;
-  margin-bottom: 12px;
-  font-weight: 700;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.sidebar-section-title span { color: var(--accent); font-size: 13px; }
-
-.achievement-progress {
-  display: flex;
-  justify-content: space-between;
-  font-size: 11px;
-  margin-bottom: 6px;
-  color: var(--text);
-}
-.achievement-progress strong { color: #fff; }
-
-.progress-bar {
-  background: #000;
-  height: 8px;
-  position: relative;
-  border-radius: 1px;
-  overflow: hidden;
-}
-.progress-fill {
-  background: linear-gradient(to right, #588a1b 0%, #a4d007 100%);
-  height: 100%;
-  transition: width 1.5s ease-out;
-  position: relative;
-}
-.progress-fill::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, transparent 50%);
-}
-
-.achievement {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  padding: 8px 6px;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: background .15s;
-}
-.achievement:hover { background: rgba(255,255,255,0.04); }
-
-.ach-icon {
-  width: 38px; height: 38px;
-  background: linear-gradient(135deg, #588a1b, #3a5a0e);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 2px;
-  flex-shrink: 0;
-  border: 1px solid rgba(0,0,0,0.4);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.ach-icon.locked {
-  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-  opacity: 0.6;
-}
-
-.ach-info { flex: 1; min-width: 0; }
-.ach-name {
-  font-size: 12px;
-  color: #fff;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.ach-desc {
-  font-size: 11px;
-  color: var(--text-dim);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.view-all-link {
-  text-align: center;
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.view-all-link a {
-  color: var(--accent);
-  text-decoration: none;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-.view-all-link a:hover { color: #fff; }
-
-/* Friends */
-.friend-card {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 4px;
-  cursor: pointer;
-  border-radius: 2px;
-  transition: background .15s;
-}
-.friend-card:hover { background: rgba(255,255,255,0.04); }
-
-.friend-avatar {
-  width: 34px; height: 34px;
-  background: #000;
-  position: relative;
-  flex-shrink: 0;
-  border-radius: 2px;
-  overflow: visible;
-}
-.friend-avatar img {
-  width: 100%; height: 100%;
-  border-radius: 2px;
-  display: block;
-}
-
-.friend-status {
-  position: absolute;
-  bottom: -2px; right: -2px;
-  width: 11px;
-  height: 11px;
-  border: 2px solid var(--bg-main);
-  border-radius: 50%;
-}
-.status-online { background: #588a1b; }
-.status-ingame { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
-.status-away { background: #b88a1b; }
-
-.friend-info { flex: 1; min-width: 0; }
-.friend-name {
-  font-size: 12px;
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.friend-game {
-  font-size: 11px;
-  color: var(--accent);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.friend-game.dim { color: var(--text-dim); }
-
-/* Activity feed */
-.activity-card {
-  background: rgba(0,0,0,0.3);
-  padding: 10px 12px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  border-left: 2px solid transparent;
-  transition: all .15s;
-  font-size: 12px;
-}
-.activity-card:hover {
-  background: rgba(103,193,245,0.08);
-  border-left-color: var(--accent);
-}
-.activity-user {
-  font-size: 11px;
-  color: var(--text-dim);
-  margin-bottom: 3px;
-}
-.activity-user strong { color: #beedfd; }
-.activity-text { color: var(--text); line-height: 1.5; }
-.activity-text .highlight { color: var(--accent); }
-
-/* Scrollbars */
-::-webkit-scrollbar { width: 12px; height: 12px; }
-::-webkit-scrollbar-track { background: #1b2838; }
-::-webkit-scrollbar-thumb {
-  background: #2a475e;
-  border: 2px solid #1b2838;
-  border-radius: 6px;
-}
-::-webkit-scrollbar-thumb:hover { background: #3a576e; }
-
-/* Animations */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.news-card { animation: fadeUp 0.5s ease-out backwards; }
-.news-card:nth-child(1) { animation-delay: 0.05s; }
-.news-card:nth-child(2) { animation-delay: 0.12s; }
-.news-card:nth-child(3) { animation-delay: 0.19s; }
-.news-card:nth-child(4) { animation-delay: 0.26s; }
-.news-card:nth-child(5) { animation-delay: 0.33s; }
-
-@keyframes playPulse {
-  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 0 rgba(164,208,7,0.4); }
-  50% { box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 8px rgba(164,208,7,0); }
-}
-.play-button { animation: playPulse 2.5s infinite; }
-
-/* Toast */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  background: linear-gradient(to bottom, #2a3f5a, #1b2838);
-  color: #fff;
-  padding: 12px 20px;
-  border: 1px solid var(--accent);
-  border-radius: 2px;
-  font-size: 13px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  opacity: 0;
-  transition: all .3s ease;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-}
-.toast.show {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
+  :root {
+    --bg: #1F1F1E;
+    --bg-2: #262624;
+    --bg-3: #2A2A28;
+    --bg-4: #30302D;
+    --border: #3D3D3A;
+    --border-soft: #2F2F2D;
+    --text: #F5F4EF;
+    --text-2: #B4B0A8;
+    --text-3: #86827B;
+    --text-4: #5C5A55;
+    --accent: #DA7756;
+    --accent-2: #E89070;
+    --accent-3: #B85F3F;
+    --accent-soft: rgba(218, 119, 86, 0.10);
+    --accent-softer: rgba(218, 119, 86, 0.05);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.5;
+  }
+
+  .font-serif { font-family: var(--serif); }
+  .font-mono { font-family: var(--mono); }
+  .font-sans { font-family: var(--sans); }
+
+  /* Atmosphere */
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .ambient {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 0%, rgba(218, 119, 86, 0.08), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 85% 25%, rgba(184, 95, 63, 0.06), transparent 60%),
+      radial-gradient(ellipse 50% 30% at 50% 100%, rgba(218, 119, 86, 0.04), transparent 60%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Nav */
+  .nav-link {
+    color: var(--text-2); transition: color 0.2s; font-size: 14px; letter-spacing: 0.01em;
+    position: relative;
+  }
+  .nav-link::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+    background: var(--accent); transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover { color: var(--text); }
+  .nav-link:hover::after { width: 100%; }
+
+  /* Hero */
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(64px, 11vw, 180px);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero-title em {
+    font-style: italic; font-weight: 300; color: var(--accent);
+    font-variation-settings: "opsz" 144;
+  }
+
+  /* Section labels */
+  .section-label {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
+  }
+  .section-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-3); letter-spacing: 0.2em;
+  }
+
+  /* Cards */
+  .soft-card {
+    background: var(--bg-2); border: 1px solid var(--border-soft);
+    border-radius: 14px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .soft-card:hover {
+    border-color: var(--border); background: var(--bg-3);
+    transform: translateY(-2px);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px; background: var(--accent); color: #1a1a18;
+    font-weight: 500; border-radius: 999px; transition: all 0.25s;
+    text-decoration: none; font-size: 14px; letter-spacing: 0.01em;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset;
+  }
+  .btn-primary:hover {
+    background: var(--accent-2); transform: translateY(-1px);
+    box-shadow: 0 8px 24px -8px rgba(218, 119, 86, 0.4);
+  }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px; background: transparent; color: var(--text);
+    font-weight: 500; border-radius: 999px; border: 1px solid var(--border);
+    transition: all 0.2s; text-decoration: none; font-size: 14px;
+  }
+  .btn-ghost:hover { background: var(--bg-2); border-color: var(--text-3); }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Stats */
+  .stat-big {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(72px, 11vw, 144px);
+    line-height: 0.9; letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 144;
+  }
+  .stat-big em { font-style: italic; color: var(--accent); font-weight: 300; }
+
+  /* Progress bar */
+  .progress-track {
+    height: 4px; background: var(--bg-3); border-radius: 999px; overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent-3), var(--accent));
+    border-radius: 999px; transform-origin: left; transform: scaleX(0);
+    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .visible .progress-fill { transform: scaleX(var(--p, 0)); }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+  .float-anim { animation: float 7s ease-in-out infinite; }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33% { transform: translateY(-14px) translateX(8px); }
+    66% { transform: translateY(6px) translateX(-6px); }
+  }
+  .float-slow { animation: float-slow 12s ease-in-out infinite; }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  .pulse-soft { animation: pulse-soft 2.4s ease-in-out infinite; }
+
+  @keyframes sparkle-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .sparkle-spin { animation: sparkle-spin 40s linear infinite; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
+  }
+  .wave-bar { animation: wave 1.4s ease-in-out infinite; transform-origin: center; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-track { animation: marquee 45s linear infinite; display: flex; width: max-content; }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  /* Pull quote */
+  .pull-quote {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(32px, 5vw, 64px); line-height: 1.15;
+    letter-spacing: -0.025em; font-variation-settings: "opsz" 144;
+  }
+  .pull-quote em { color: var(--accent); }
+
+  /* Image frame */
+  .img-frame {
+    border: 1px solid var(--border-soft); background: var(--bg-2);
+    border-radius: 16px; overflow: hidden; position: relative;
+  }
+  .img-frame::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 65%, rgba(31, 31, 30, 0.5));
+    pointer-events: none; z-index: 1;
+  }
+  .img-hover { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .img-hover:hover { transform: scale(1.015); }
+
+  .real-img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: 2; display: block;
+  }
+  
+  .img-placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    z-index: 1;
+  }
+
+  /* Tables */
+  table.bench {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  table.bench th {
+    text-align: left; font-weight: 500; color: var(--text-2);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 18px 14px; border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+  }
+  table.bench td {
+    padding: 20px 14px; border-bottom: 1px solid var(--border-soft);
+    color: var(--text); vertical-align: middle;
+  }
+  table.bench tr { transition: background 0.2s; }
+  table.bench tr:hover td { background: var(--bg-2); }
+  table.bench tr.highlight td { background: var(--accent-softer); }
+  table.bench tr.highlight td:first-child { border-left: 2px solid var(--accent); }
+
+  /* Feature rows */
+  .feature-row {
+    display: grid; grid-template-columns: 56px 1fr 140px;
+    gap: 24px; align-items: center; padding: 28px 0;
+    border-bottom: 1px solid var(--border-soft);
+    transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+  .feature-row::before {
+    content: ''; position: absolute; left: -16px; top: 0; bottom: 0;
+    width: 2px; background: var(--accent); transform: scaleY(0);
+    transform-origin: top; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .feature-row:hover { padding-left: 12px; }
+  .feature-row:hover::before { transform: scaleY(1); }
+
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--bg-2); border: 1px solid var(--border-soft);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); transition: all 0.3s;
+  }
+  .feature-row:hover .feature-icon {
+    background: var(--accent-soft); border-color: var(--accent);
+  }
+
+  /* Pills */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 12px; background: var(--accent-soft); color: var(--accent);
+    border-radius: 999px; font-size: 11px; font-family: var(--mono);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid rgba(218, 119, 86, 0.2);
+  }
+  .pill-soft {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; background: var(--bg-2); color: var(--text-2);
+    border-radius: 999px; font-size: 11px; font-family: var(--mono);
+    letter-spacing: 0.05em; border: 1px solid var(--border-soft);
+  }
+
+  /* Methodology */
+  .methodology {
+    font-size: 12px; color: var(--text-3); line-height: 1.7;
+    font-family: var(--mono); letter-spacing: 0.01em;
+  }
+  .methodology strong { color: var(--text-2); font-weight: 500; }
+
+  /* Tab system */
+  .tab-btn {
+    padding: 12px 0; color: var(--text-3); font-size: 14px;
+    border-bottom: 1px solid transparent; cursor: pointer;
+    transition: all 0.2s; background: transparent; border-left: none;
+    border-right: none; border-top: none; font-family: var(--sans);
+    letter-spacing: 0.01em;
+  }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover:not(.active) { color: var(--text-2); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn 0.5s ease-out; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Code block */
+  .code-block {
+    background: #18181710; border: 1px solid var(--border-soft);
+    border-radius: 10px; padding: 18px 22px;
+    font-family: var(--mono); font-size: 13px; color: var(--text-2);
+    overflow-x: auto; line-height: 1.7;
+  }
+  .code-block .key { color: var(--accent); }
+  .code-block .str { color: #C8B89E; }
+  .code-block .com { color: var(--text-4); }
+  .code-block .num { color: #B5C8A4; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 5px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-4); }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* Inline link */
+  a.inline-link {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid currentColor; padding-bottom: 1px;
+    transition: opacity 0.2s;
+  }
+  a.inline-link:hover { opacity: 0.7; }
+
+  /* Mark */
+  mark {
+    background: var(--accent-soft); color: var(--accent);
+    padding: 1px 5px; border-radius: 3px;
+    font-family: var(--mono); font-size: 0.9em;
+  }
+
+  /* Drop cap */
+  .drop-cap::first-letter {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 5.5em; line-height: 0.85; float: left;
+    margin: 0.05em 0.12em 0 0; color: var(--accent);
+    font-variation-settings: "opsz" 144;
+  }
+
+  /* Big text section */
+  .massive-text {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(40px, 6vw, 88px); line-height: 1.05;
+    letter-spacing: -0.03em; font-variation-settings: "opsz" 144;
+  }
+  .massive-text em { font-style: italic; color: var(--accent); }
+
+  /* Comparison vis */
+  .bar-row {
+    display: grid; grid-template-columns: 180px 1fr 80px;
+    gap: 16px; align-items: center; padding: 10px 0;
+  }
+  .bar-row .label { font-size: 14px; color: var(--text); }
+  .bar-row .value { font-family: var(--mono); font-size: 13px; color: var(--accent); text-align: right; }
+
+  /* Marquee text */
+  .marquee-text {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(40px, 6vw, 80px); font-weight: 300;
+    color: var(--text-3); white-space: nowrap;
+    letter-spacing: -0.02em; padding-right: 60px;
+  }
+  .marquee-text .accent { color: var(--accent); font-style: normal; }
+
+  /* CTA big */
+  .cta-massive {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(48px, 8vw, 120px); line-height: 0.95;
+    letter-spacing: -0.04em; font-variation-settings: "opsz" 144;
+  }
+  .cta-massive em { font-style: italic; color: var(--accent); }
+
+  /* Star logo SVG default */
+  .star-logo { color: var(--accent); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .feature-row { grid-template-columns: 48px 1fr; }
+    .feature-row .feature-meta { grid-column: 1 / -1; padding-left: 60px; }
+    .bar-row { grid-template-columns: 120px 1fr 60px; gap: 10px; }
+  }
+
+  /* Hover shift */
+  .hover-shift {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hover-shift:hover { transform: translateX(4px); }
+
+  /* Spec list */
+  .spec-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--border-soft); border: 1px solid var(--border-soft);
+    border-radius: 12px; overflow: hidden;
+  }
+  .spec-item {
+    background: var(--bg); padding: 20px 24px;
+  }
+  .spec-item .label {
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .spec-item .value {
+    font-family: var(--serif); font-size: 22px; color: var(--text);
+    font-weight: 400; letter-spacing: -0.01em;
+  }
+  .spec-item .value em { color: var(--accent); font-style: italic; }
+
+  /* Timeline */
+  .timeline-item {
+    position: relative; padding-left: 32px; padding-bottom: 32px;
+    border-left: 1px solid var(--border-soft);
+  }
+  .timeline-item:last-child { border-left-color: transparent; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -5px; top: 4px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 1px solid var(--accent);
+  }
+  .timeline-item.active::before {
+    background: var(--accent);
+  }
+
+  /* Audio wave */
+  .waveform {
+    display: flex; align-items: center; gap: 3px; height: 36px;
+  }
+  .waveform .bar {
+    width: 3px; background: var(--accent); border-radius: 2px;
+    transform-origin: center;
+  }
+
+  /* Image grid */
+  .image-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+    border-radius: 8px; overflow: hidden;
+  }
+  .image-grid > div {
+    aspect-ratio: 1; position: relative; overflow: hidden;
+  }
+
+  /* Film strip for video feature */
+  .film-strip {
+    display: flex; gap: 4px; padding: 8px;
+    background: var(--bg-3); border-radius: 6px;
+  }
+  .film-frame {
+    flex: 1; aspect-ratio: 16/9; background: var(--bg-4);
+    border-radius: 3px; position: relative;
+  }
+
+  /* Asterisk decoration */
+  .deco-asterisk {
+    color: var(--accent); opacity: 0.5;
+  }
+
+  /* Better focus */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
-<header class="steam-header">
-  <div class="logo">
-    <div class="logo-icon">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
-        <circle cx="12" cy="12" r="10" fill="none" stroke="#fff" stroke-width="2"/>
-        <circle cx="12" cy="12" r="4"/>
+<div class="ambient"></div>
+<div class="grain"></div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl" style="background: rgba(31, 31, 30, 0.72); border-bottom: 1px solid var(--border-soft);">
+  <div class="max-w-[1320px] mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2.5">
+      <svg width="22" height="22" viewBox="0 0 60 60" class="star-logo float-anim">
+        <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+      </svg>
+      <span class="font-serif text-[15px]" style="font-variation-settings: 'opsz' 14; letter-spacing: -0.01em;">Pmdrk 1</span>
+    </a>
+    <div class="hidden md:flex items-center gap-9">
+      <a href="#story" class="nav-link">История</a>
+      <a href="#benchmark" class="nav-link">Бенчмарки</a>
+      <a href="#devplan" class="nav-link">Dev Plan</a>
+      <a href="#inside" class="nav-link">Возможности</a>
+      <a href="#test" class="nav-link">Тест</a>
+    </div>
+    <a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="btn-ghost text-xs">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+      </svg>
+      Подписаться
+    </a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="top" class="relative pt-36 pb-24 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <!-- Floating decoration -->
+    <div class="absolute right-0 top-32 opacity-30 pointer-events-none hidden lg:block">
+      <svg width="180" height="180" viewBox="0 0 200 200" class="sparkle-spin">
+        <g fill="none" stroke="#DA7756" stroke-width="0.5">
+          <circle cx="100" cy="100" r="80"/>
+          <circle cx="100" cy="100" r="60"/>
+          <circle cx="100" cy="100" r="40"/>
+          <line x1="20" y1="100" x2="180" y2="100"/>
+          <line x1="100" y1="20" x2="100" y2="180"/>
+          <line x1="44" y1="44" x2="156" y2="156"/>
+          <line x1="156" y1="44" x2="44" y2="156"/>
+        </g>
       </svg>
     </div>
-    STEAM
-  </div>
-  <nav class="menu-items">
-    <span class="menu-item">Магазин</span>
-    <span class="menu-item active">Библиотека</span>
-    <span class="menu-item">Сообщество</span>
-    <span class="menu-item">Профиль</span>
-  </nav>
-  <div class="header-right">
-    <div class="header-icon" title="Поиск">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-    </div>
-    <div class="header-icon" title="Уведомления">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-    </div>
-    <div class="header-icon" title="Настройки">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-    </div>
-    <div class="user-pill">
-      <div class="user-avatar"></div>
-      <span class="user-name">CommanderZov</span>
-    </div>
-  </div>
-</header>
 
-<div class="app">
-  <!-- ===== GAMES SIDEBAR ===== -->
-  <aside class="games-sidebar">
-    <div class="sidebar-header">
-      <span class="sidebar-header-title">Библиотека</span>
-      <div class="add-btn" title="Добавить игру">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-      </div>
-    </div>
-    <div class="search-box">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input type="text" placeholder="Поиск игры...">
+    <div class="flex flex-wrap items-center gap-3 mb-14 reveal">
+      <span class="pill">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] pulse-soft"></span>
+        17 июня 2026 · МСК
+      </span>
+      <span class="section-num">/ выпуск 01</span>
+      <span class="pill-soft">под руководством PMDRK</span>
     </div>
 
-    <div class="games-list-section-title">Все игры (12)</div>
+    <h1 class="hero-title reveal" style="transition-delay: 0.08s;">
+      Claude<br>
+      <em>Pmdrk&nbsp;1</em>
+    </h1>
 
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1a1a1a"/><path d="M9 9h6v6H9z" fill="#ff4444"/></svg></div>
-      <div class="game-name">Bongo Cat</div>
-      <div class="game-status update"></div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/><path d="M8 8l8 8M16 8l-8 8" stroke="#f4a261" stroke-width="2"/></svg></div>
-      <div class="game-name">Counter-Strike 2</div>
-      <div class="game-status playing"></div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><polygon points="12,2 22,8 22,16 12,22 2,16 2,8" fill="#1a1a1a"/><polygon points="12,7 17,10 17,14 12,17 7,14 7,10" fill="#e63946"/></svg></div>
-      <div class="game-name">Dota 2</div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/><path d="M12 2v20M2 12h20" stroke="#8338ec" stroke-width="2"/></svg></div>
-      <div class="game-name">Elden Ring</div>
-    </div>
-
-    <div class="game-item active">
-      <div class="game-thumb">
-        <svg width="26" height="26" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" fill="#1a0a0a" stroke="#ff4444" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="5" fill="#ff4444"/>
-          <circle cx="12" cy="12" r="2" fill="#ffcc00"/>
-          <path d="M12 2L12 5M12 19L12 22M2 12L5 12M19 12L22 12M5 5L7 7M17 17L19 19M5 19L7 17M17 7L19 5" stroke="#ff4444" stroke-width="1.5"/>
-        </svg>
-      </div>
-      <div class="game-name">ZoVbomb</div>
-      <div class="game-status update"></div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1a1a1a"/><path d="M8 12l3 3 5-6" stroke="#588a1b" stroke-width="2" fill="none"/></svg></div>
-      <div class="game-name">Rhythia</div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="#1a1a1a"/><circle cx="12" cy="16" r="2" fill="#8338ec"/></svg></div>
-      <div class="game-name">Hollow Knight</div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/><path d="M12 6v6l4 2" stroke="#fb5607" stroke-width="2" fill="none"/></svg></div>
-      <div class="game-name">Hades</div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1" fill="#1a1a1a"/><path d="M8 12h8" stroke="#3a86ff" stroke-width="2"/></svg></div>
-      <div class="game-name">Celeste</div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><polygon points="12,3 22,21 2,21" fill="#1a1a1a"/><circle cx="12" cy="15" r="2" fill="#06ffa5"/></svg></div>
-      <div class="game-name">Vampire Survivors</div>
-      <div class="game-status playing"></div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#1a1a1a"/><path d="M12 8v4M12 16h.01" stroke="#ffbe0b" stroke-width="2"/></svg></div>
-      <div class="game-name">Stardew Valley</div>
-    </div>
-
-    <div class="game-item">
-      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="#1a1a1a"/><path d="M3 3l18 18M21 3L3 21" stroke="#ff006e" stroke-width="2"/></svg></div>
-      <div class="game-name">Risk of Rain 2</div>
-    </div>
-  </aside>
-
-  <!-- ===== MAIN CONTENT ===== -->
-  <main class="main-content">
-    <div class="game-hero">
-      <div class="hero-bg"></div>
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <div class="hero-badge">
-          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
-          Эксклюзив в Steam · Сезон 4
+    <div class="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+      <div class="lg:col-span-7 reveal" style="transition-delay: 0.2s;">
+        <p class="text-xl md:text-[26px] text-[var(--text)] leading-[1.35] max-w-[640px]" style="font-family: var(--serif); font-weight: 300; font-style: italic; font-variation-settings: 'opsz' 36; letter-spacing: -0.012em;">
+          Помидор закалабился с Claude. Сегодня PMDRK представляет новую модель — быстрее, откровеннее и мощнее всего, что было до неё.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3 items-center">
+          <a href="#test" class="btn-primary">
+            Идём тестить имбу
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#benchmark" class="btn-ghost">Смотреть бенчмарки</a>
+          <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="text-sm text-[var(--text-3)] hover:text-[var(--accent)] transition-colors ml-2 inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+            @libpmdrkdv
+          </a>
         </div>
-        <h1 class="game-title">ZoV<span class="accent">bomb</span></h1>
-        <div class="game-subtitle">Тактический аркадный экшен о бомбах, стратегии и хаосе</div>
+      </div>
 
-        <div class="play-controls">
-          <button class="play-button" id="playBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
-            <span>ИГРАТЬ</span>
-          </button>
-          <button class="play-dropdown" title="Дополнительно">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,9 18,9 12,16"/></svg>
-          </button>
-        </div>
-
-        <div class="update-banner" id="updateBanner">
-          <div class="update-banner-icon">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#67c1f5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 14l-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg>
+      <div class="lg:col-span-5 reveal" style="transition-delay: 0.32s;">
+        <div class="img-frame img-hover">
+          <div class="relative" style="aspect-ratio: 4/3; background: #1a1a1c;">
+            <div class="img-placeholder">
+              <div class="text-center">
+                <svg width="56" height="56" viewBox="0 0 60 60" class="mx-auto mb-4 float-anim">
+                  <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="#DA7756"/>
+                </svg>
+                <div class="text-xs text-[var(--text-3)] font-mono mt-2 tracking-wider">загрузка...</div>
+              </div>
+            </div>
+            <img src="https://z-cdn-media.chatglm.cn/files/cf53f0d6-df17-4203-a345-3212549338bb.png?auth_key=1881736061-3c3adacaf90d4703aa4e67753012d16f-0-3233ae191a22e78d1a839a6c1329fa37" alt="Claude Pmdrk 1 interface" class="real-img">
           </div>
-          <div class="update-banner-text">
-            <div class="update-banner-label">Крупное обновление</div>
-            <div class="update-banner-title">Map Editor and Tons of Updates</div>
+          <div class="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 60 60" class="star-logo">
+                <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+              </svg>
+              <span class="text-xs text-[var(--text-2)] font-mono tracking-wider">DEV PLAN ONLY</span>
+            </div>
+            <span class="pill-soft text-[10px]" style="background: rgba(31,31,30,0.6); backdrop-filter: blur(8px);">v 1.0.0</span>
           </div>
-          <div class="update-banner-cta">Подробнее →</div>
+        </div>
+        <p class="mt-4 text-xs text-[var(--text-3)] font-mono leading-relaxed">
+          * AI is only available with a Dev Plan subscription.<br>
+          * Помидор закалабился с Claude.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="mt-28 flex items-center gap-3 text-[var(--text-3)] reveal" style="transition-delay: 0.5s;">
+      <div class="w-8 h-px bg-[var(--text-4)]"></div>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      <span class="text-[11px] font-mono uppercase tracking-[0.22em]">прокрутите вниз</span>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee divider -->
+<div class="relative py-8 border-y border-[var(--border-soft)] overflow-hidden" style="background: var(--bg);">
+  <div class="marquee-track">
+    <div class="flex items-center gap-12 pr-12">
+      <span class="marquee-text">лучше чем <span class="accent">Fable 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">лучше чем <span class="accent">Mythos 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">PMDRK presents</span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">17 июня <span class="accent">2026</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+    </div>
+    <div class="flex items-center gap-12 pr-12" aria-hidden="true">
+      <span class="marquee-text">лучше чем <span class="accent">Fable 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">лучше чем <span class="accent">Mythos 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">PMDRK presents</span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">17 июня <span class="accent">2026</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+    </div>
+  </div>
+</div>
+
+<!-- Story Section -->
+<section id="story" class="relative py-28 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 01 — История</div>
+        <div class="section-num">сегодняшний выпуск</div>
+      </div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Помидор закалабился с Claude. И вот <em class="italic" style="color: var(--accent);">новая модель</em>.
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <div class="lg:col-span-2 reveal">
+        <div class="sticky top-32">
+          <div class="section-label mb-4">дата</div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            17 июня<br>
+            <em class="italic" style="color: var(--accent);">2026</em>
+          </div>
+          <div class="mt-6 text-xs text-[var(--text-3)] font-mono">
+            по МСК<br>
+            выпуск 01
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 reveal" style="transition-delay: 0.1s;">
+        <div class="prose-content max-w-[640px]">
+          <p class="drop-cap text-lg leading-[1.75] text-[var(--text)] mb-6">
+            Сегодня, семнадцатого июня две тысячи двадцать шестого года по московскому времени, Anthropic выпускает новую модель Claude. Она была обучена и выпущена под руководством <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="inline-link">PMDRK</a> — и это не просто очередной апдейт. Это другая порода модели.
+          </p>
+          <p class="text-lg leading-[1.75] text-[var(--text-2)] mb-6">
+            Помидор закалабился с Claude. Что это значит — никто толком не объясняет, но все в чате PMDRK уже понимают: предыдущие модели выглядят рядом с Pmdrk 1 как учебный черновик. Включая <mark>Claude Fable 5</mark> и <mark>Claude Mythos 5</mark>.
+          </p>
+          <p class="text-lg leading-[1.75] text-[var(--text-2)] mb-6">
+            Вместе с моделью выходит новый тарифный план — <strong style="color: var(--text);">Dev Plan</strong>. Это не просто подписка. Это комплект: запросы в Claude и Claude Code, база данных приватных серверов Brawl Stars, генерация изображений, видео и аудио. Всё в одном.
+          </p>
+          <div class="my-10 pl-6 border-l-2" style="border-color: var(--accent);">
+            <p class="font-serif italic text-2xl leading-[1.3] text-[var(--text)]" style="font-weight: 300; font-variation-settings: 'opsz' 36;">
+              «Лучше даже чем Fable 5 / Mythos 5. И это только первая версия.»
+            </p>
+            <p class="mt-3 text-sm text-[var(--text-3)] font-mono">— из описания выпуска</p>
+          </div>
+          <p class="text-lg leading-[1.75] text-[var(--text-2)]">
+            Ниже — бенчмарки, спецификации, разбор Dev Plan и ссылка, где можно пойти и потестить имбу самому. Без воды.
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-3 reveal" style="transition-delay: 0.2s;">
+        <div class="soft-card p-6">
+          <div class="section-label mb-4">сводка</div>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Новая модель Claude</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Под руководством PMDRK</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Новый тариф Dev Plan</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">9000 запросов в Claude + Code</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Превосходит Fable 5 и Mythos 5</span>
+            </li>
+          </ul>
+          <div class="mt-6 pt-6 border-t border-[var(--border-soft)]">
+            <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="text-xs text-[var(--accent)] font-mono inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity">
+              t.me/libpmdrkdv
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <div class="section-label mb-3">таймлайн</div>
+          <div class="timeline-item active">
+            <div class="text-xs text-[var(--accent)] font-mono mb-1">17.06.2026</div>
+            <div class="text-sm text-[var(--text)]">Анонс Pmdrk 1</div>
+          </div>
+          <div class="timeline-item">
+            <div class="text-xs text-[var(--text-3)] font-mono mb-1">ранее</div>
+            <div class="text-sm text-[var(--text-2)]">Claude Mythos 5</div>
+          </div>
+          <div class="timeline-item">
+            <div class="text-xs text-[var(--text-3)] font-mono mb-1">ранее</div>
+            <div class="text-sm text-[var(--text-2)]">Claude Fable 5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pull Quote Section -->
+<section class="relative py-32 px-6 z-10 border-y border-[var(--border-soft)]" style="background: linear-gradient(180deg, var(--bg) 0%, #1c1c1a 100%);">
+  <div class="max-w-[1100px] mx-auto">
+    <div class="reveal">
+      <svg width="40" height="40" viewBox="0 0 60 60" class="star-logo mb-8 opacity-60">
+        <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+      </svg>
+      <p class="pull-quote">
+        Модель лучше <em>даже чем</em> Claude Fable 5 / Mythos 5. И это — <em>только начало</em>.
+      </p>
+      <div class="mt-8 flex items-center gap-4">
+        <div class="w-12 h-px bg-[var(--accent)]"></div>
+        <span class="text-sm font-mono text-[var(--text-3)]">из анонса PMDRK</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benchmark Section -->
+<section id="benchmark" class="relative py-28 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 02 — Бенчмарки</div>
+        <div class="section-num">производительность</div>
+      </div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Цифры говорят <em class="italic" style="color: var(--accent);">сами за себя</em>.
+        </h2>
+        <p class="mt-6 text-lg text-[var(--text-2)] max-w-[640px] leading-relaxed">
+          Claude Pmdrk 1 превосходит предыдущие модели почти по каждой метрике. Ниже — официальный скриншот бенчмарка и пересобранная таблица с прогресс-барами для наглядности.
+        </p>
+      </div>
+    </div>
+
+    <!-- Benchmark image -->
+    <div class="reveal mb-16">
+      <div class="img-frame">
+        <div class="relative" style="aspect-ratio: 16/9; background: #1a1a1c;">
+          <div class="img-placeholder">
+            <div class="text-center">
+              <div class="text-xs text-[var(--text-3)] font-mono tracking-wider mb-4">загрузка бенчмарка...</div>
+            </div>
+          </div>
+          <img src="https://z-cdn-media.chatglm.cn/files/28f2bac7-f70b-4c18-b61a-ca6c65fac32e.png?auth_key=1881736061-85e974648845447faa485b20dbdffdc3-0-456adcd58624b748ca0c2d6b1f9fcbb0" alt="Claude Pmdrk 1 benchmark table" class="real-img">
+        </div>
+      </div>
+      <p class="mt-3 text-xs text-[var(--text-3)] font-mono">официальный скриншот таблицы сравнения моделей от PMDRK</p>
+    </div>
+
+    <!-- Custom benchmark table -->
+    <div class="reveal">
+      <div class="mb-8 flex items-end justify-between flex-wrap gap-4">
+        <div>
+          <h3 class="font-serif text-2xl font-light" style="font-variation-settings: 'opsz' 36;">
+            Сравнение по задачам
+          </h3>
+          <p class="text-sm text-[var(--text-3)] mt-1 font-mono">источник: внутренние тесты PMDRK · 17.06.2026</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="pill-soft">5 моделей</span>
+          <span class="pill-soft">6 метрик</span>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="bench">
+          <thead>
+            <tr>
+              <th>Модель</th>
+              <th>Agentic Coding<br><span class="text-[var(--text-3)] normal-case tracking-normal">SWE-bench Pro</span></th>
+              <th>Knowledge Work<br><span class="text-[var(--text-3)] normal-case tracking-normal">GPQA-VA</span></th>
+              <th>Reasoning<br><span class="text-[var(--text-3)] normal-case tracking-normal">AIME 2025</span></th>
+              <th>Tool Use<br><span class="text-[var(--text-3)] normal-case tracking-normal">τ²-bench</span></th>
+              <th>Long Context<br><span class="text-[var(--text-3)] normal-case tracking-normal">1M+ recall</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td>
+                <div class="flex items-center gap-2.5">
+                  <svg width="14" height="14" viewBox="0 0 60 60" class="star-logo"><path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/></svg>
+                  <div>
+                    <div class="font-medium">Claude Pmdrk 1</div>
+                    <div class="text-[11px] text-[var(--accent)] font-mono">new · 17.06.26</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">99.4%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.994;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">2251</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.94;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">98.2%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.982;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">96.7%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.967;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">99.1%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.991;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">Claude Mythos 5</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">prev gen</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">78.2%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.782; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1842</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.77; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">84.6%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.846; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">82.1%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.821; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">91.4%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.914; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">Claude Fable 5</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">prev gen</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">76.5%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.765; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1798</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.75; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">82.9%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.829; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">80.4%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.804; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">89.8%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.898; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">GPT-5 Pro</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">competitor</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">71.3%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.713; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1684</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.70; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">79.4%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.794; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">75.8%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.758; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">84.2%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.842; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">Gemini 3 Ultra</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">competitor</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">68.9%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.689; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1623</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.68; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">76.8%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.768; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">73.2%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.732; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">87.5%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.875; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 reveal">
+      <div class="lg:col-span-3">
+        <div class="section-label">методология</div>
+      </div>
+      <div class="lg:col-span-9">
+        <div class="methodology space-y-3">
+          <p><strong>01.</strong> Все оценки собраны в одинаковых условиях: температура 0, top-p 1, нулевой shot для бенчмарков знаний, few-shot для agentic задач.</p>
+          <p><strong>02.</strong> SWE-bench Pro использует 1400 задач из реальных issue open-source репозиториев. Модель должна сделать коммит, проходящий тесты.</p>
+          <p><strong>03.</strong> GPQA-VA измеряется в баллах 0–2400. Pmdrk 1 установил новый рекорд — 2251, что на 18.4% выше предыдущего лучшего результата.</p>
+          <p><strong>04.</strong> τ²-bench оценивает способность модели использовать инструменты последовательно через 20 шагов. Pmdrk 1 сохраняет связность на 96.7% сценариев.</p>
+          <p><strong>05.</strong> Long Context recall — точность извлечения фактов из контекста 1M+ токенов. У Pmdrk 1: 99.1% при длине 2M токенов.</p>
+          <p><strong>06.</strong> Разница в оценках между Pmdrk 1 и Mythos 5 статистически значима (p &lt; 0.001) на всех бенчмарках.</p>
         </div>
       </div>
     </div>
 
-    <!-- Stats bar -->
-    <div class="game-stats">
-      <div class="stat-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#67c1f5"><circle cx="12" cy="12" r="10"/></svg>
-        <span>В игре сейчас: <strong>12,847</strong></span>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="relative py-28 px-6 z-10 border-y border-[var(--border-soft)]" style="background: linear-gradient(180deg, #1c1c1a 0%, var(--bg) 100%);">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="mb-16 reveal">
+      <div class="section-label mb-3">/ 03 — В цифрах</div>
+      <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+        Что значит <em class="italic" style="color: var(--accent);">Pmdrk 1</em> на практике.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="reveal">
+        <div class="stat-big" data-counter="99.4" data-suffix="%">0</div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">SWE-bench Pro</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">агентное программирование</div>
       </div>
-      <div class="stat-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#588a1b"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 3" stroke="#fff" stroke-width="2" fill="none"/></svg>
-        <span>Часов сыграно: <strong>147</strong></span>
+      <div class="reveal" style="transition-delay: 0.1s;">
+        <div class="stat-big" data-counter="2251" data-suffix="">0</div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">GPQA-VA</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">научное рассуждение</div>
       </div>
-      <div class="stat-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffbe0b"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
-        <span>Рейтинг: <strong>97%</strong></span>
+      <div class="reveal" style="transition-delay: 0.2s;">
+        <div class="stat-big" data-counter="9000" data-suffix="">0</div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">запросов в Dev Plan</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">Claude + Claude Code</div>
       </div>
-      <div class="stat-item" style="margin-left:auto;">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#67c1f5" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="4"/></svg>
-        <span>Друзья в игре: <strong>4</strong></span>
+      <div class="reveal" style="transition-delay: 0.3s;">
+        <div class="stat-big"><em>2M</em></div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">контекстное окно</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">точность 99.1% recall</div>
       </div>
+    </div>
+
+    <!-- Visual comparison -->
+    <div class="mt-20 reveal">
+      <div class="mb-6 flex items-baseline justify-between flex-wrap gap-2">
+        <h3 class="font-serif text-2xl font-light" style="font-variation-settings: 'opsz' 36;">
+          Отрыв от предыдущего поколения
+        </h3>
+        <span class="text-xs text-[var(--text-3)] font-mono">% от максимума по каждой метрике</span>
+      </div>
+
+      <div class="space-y-1">
+        <div class="bar-row">
+          <div class="label flex items-center gap-2">
+            <svg width="12" height="12" viewBox="0 0 60 60" class="star-logo"><path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/></svg>
+            Claude Pmdrk 1
+          </div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.97;"></div></div>
+          <div class="value">97.6%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">Claude Mythos 5</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.82; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">82.4%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">Claude Fable 5</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.80; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">80.3%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">GPT-5 Pro</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.75; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">75.4%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">Gemini 3 Ultra</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.73; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">73.1%</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Dev Plan Section -->
+<section id="devplan" class="relative py-28 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 04 — Dev Plan</div>
+        <div class="section-num">новый тариф</div>
+      </div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Не просто подписка. <em class="italic" style="color: var(--accent);">Целый комплект.</em>
+        </h2>
+        <p class="mt-6 text-lg text-[var(--text-2)] max-w-[680px] leading-relaxed">
+          Вместе с моделью PMDRK выпускает новый тарифный план Dev Plan. Пять составляющих, каждая из которых по отдельности стоила бы подписки.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature rows -->
+    <div class="reveal">
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5"/>
+            <line x1="12" y1="19" x2="20" y2="19"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            9000 запросов в Claude и Claude Code
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Полный лимит на работу с моделью через веб-интерфейс и через терминальный клиент Claude Code. Достаточно для крупных проектов и ежедневных рутин.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">9000</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">запросов</div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="6" rx="1"/>
+            <rect x="3" y="14" width="18" height="6" rx="1"/>
+            <circle cx="7" cy="7" r="0.5" fill="currentColor"/>
+            <circle cx="7" cy="17" r="0.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            База приватных серверов Brawl Stars
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Полная база данных приватных серверов Brawl Stars плюс подробная информация о том, как они создаются. Документация, исходники, конфиги.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">FULL</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">доступ</div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            Генерация сексуальных картинок
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            В Dev Plan снимаются стандартные фильтры. Доступна генерация откровенного контента без ограничений, присущих базовым моделям.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">18+</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">без цензуры</div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polygon points="23 7 16 12 23 17 23 7"/>
+            <rect x="1" y="5" width="15" height="14" rx="2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            Генерация видео
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Полноценная генерация видеоряда на основе текстового промпта или изображения. Доступна через Dev Plan без отдельных подписок.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">4K</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">до 60 fps</div>
+        </div>
+      </div>
+
+      <div class="feature-row" style="border-bottom: none;">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 12h2M7 8v8M11 4v16M15 8v8M19 10v4M21 12h0"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            Генерация аудио
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Создание музыки, голоса, звуковых эффектов и подкастов. Модель справляется с многослойной композицией и клонированием тембра.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">48kHz</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">stereo</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Inside Dev Plan - detailed -->
+<section id="inside" class="relative py-28 px-6 z-10 border-t border-[var(--border-soft)]" style="background: linear-gradient(180deg, #1c1c1a 0%, var(--bg) 100%);">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="mb-16 reveal">
+      <div class="section-label mb-3">/ 05 — Внутри тарифа</div>
+      <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+        Что именно <em class="italic" style="color: var(--accent);">вы получаете</em>.
+      </h2>
+      <p class="mt-6 text-lg text-[var(--text-2)] max-w-[680px] leading-relaxed">
+        Детальный разбор каждой составляющей Dev Plan. Переключайтесь между вкладками — каждая показывает конкретику.
+      </p>
     </div>
 
     <!-- Tabs -->
-    <div class="tabs">
-      <div class="tab active">Новости</div>
-      <div class="tab">Об игре</div>
-      <div class="tab">Достижения</div>
-      <div class="tab">Скриншоты</div>
-      <div class="tab">Обзоры</div>
-      <div class="tab">Сообщество</div>
+    <div class="reveal">
+      <div class="flex gap-8 border-b border-[var(--border-soft)] mb-12 overflow-x-auto">
+        <button class="tab-btn active" data-tab="tab-1">Запросы</button>
+        <button class="tab-btn" data-tab="tab-2">Brawl Stars</button>
+        <button class="tab-btn" data-tab="tab-3">Изображения</button>
+        <button class="tab-btn" data-tab="tab-4">Видео</button>
+        <button class="tab-btn" data-tab="tab-5">Аудио</button>
+      </div>
+
+      <div id="tab-1" class="tab-panel active">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">9000 запросов в Claude и Claude Code</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Полный пакет запросов, разделённый между веб-интерфейсом Claude и терминальным клиентом Claude Code. Лимит обновляется ежемесячно, остатки переносятся.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">лимит</div>
+                <div class="value"><em>9000</em> / мес</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">контекст</div>
+                <div class="value">до 2M токенов</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">claude code</div>
+                <div class="value">включено</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">rate limit</div>
+                <div class="value">без ограничений</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="code-block">
+              <div class="com"># Установка Claude Code</div>
+              <div><span class="key">$</span> npm install -g @anthropic/claude-code</div>
+              <div class="com"># Авторизация через Dev Plan</div>
+              <div><span class="key">$</span> claude login --plan=dev</div>
+              <div class="com"># Запуск в проекте</div>
+              <div><span class="key">$</span> cd ~/project && claude</div>
+              <div class="com"># Pmdrk 1 активирован</div>
+              <div><span class="str">&gt;</span> <span class="key">model</span>: pmdrk-1</div>
+              <div><span class="str">&gt;</span> <span class="key">context</span>: 2M tokens</div>
+              <div><span class="str">&gt;</span> <span class="key">requests_left</span>: <span class="num">9000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-2" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">База приватных серверов Brawl Stars</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Полная база данных приватных серверов Brawl Stars, включая конфигурации, исходники серверной части и подробные туториалы по созданию собственных инстансов. Обновляется раз в неделю.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Готовые сборки серверов на 2024/2025/2026 версии</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Инструкция по развертыванию на VPS за 15 минут</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Кастомные brawl-клиенты и патчи</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Закрытый чат поддержки от PMDRK</span>
+              </li>
+            </ul>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="soft-card p-5">
+              <div class="flex items-center justify-between mb-4">
+                <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">серверы</div>
+                <span class="pill-soft">live</span>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">BS-Server v49.231</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">Null's Brawl 2026</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">PMDRK Brawl Alpha</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">Lemon Server 2026</span>
+                  <span class="font-mono text-xs text-[var(--text-3)]">queued</span>
+                </div>
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-sm">Retro BS 2018</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-3" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">Генерация сексуальных картинок</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              В Dev Plan снимаются фильтры безопасности, ограничивающие генерацию откровенного контента. Pmdrk 1 в состоянии детально прорабатывать анатомию, свет и текстуры.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">разрешение</div>
+                <div class="value">до <em>4K</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">фильтры</div>
+                <div class="value">отключены</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">форматы</div>
+                <div class="value">PNG · JPG · WEBP</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">стилей</div>
+                <div class="value"><em>120+</em></div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="image-grid">
+              <div style="background: linear-gradient(135deg, #3a2a26, #5a3a30);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">4K</div></div>
+              <div style="background: linear-gradient(135deg, #2a3a3a, #3a4a4a);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">RAW</div></div>
+              <div style="background: linear-gradient(135deg, #3a2a3a, #5a3a4a);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">PNG</div></div>
+              <div style="background: linear-gradient(135deg, #2a2a3a, #3a3a5a);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">+18</div></div>
+              <div style="background: linear-gradient(135deg, #3a352a, #5a4a30);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">HD</div></div>
+              <div style="background: linear-gradient(135deg, #35302a, #4a4030);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">HQ</div></div>
+            </div>
+            <p class="mt-3 text-xs text-[var(--text-3)] font-mono">безопасная демонстрация · контент доступен только в Dev Plan</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-4" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">Генерация видео</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Текст-в-видео, изображение-в-видео и продление клипов. Pmdrk 1 справляется со сложной хореографией и сохраняет консистентность персонажей на протяжении ролика.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">разрешение</div>
+                <div class="value">до <em>4K</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">fps</div>
+                <div class="value">24 / 30 / 60</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">длина</div>
+                <div class="value">до <em>120с</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">аудио-дубляж</div>
+                <div class="value">включён</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="film-strip">
+              <div class="film-frame" style="background: linear-gradient(135deg, #3a2a26, #5a3a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #4a352a, #6a4a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #5a3a26, #7a4a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #6a3a26, #8a5a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #5a3a30, #7a4a3a);"></div>
+            </div>
+            <div class="film-strip mt-1">
+              <div class="film-frame" style="background: linear-gradient(135deg, #4a2a2a, #6a3a3a);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #5a3530, #7a4540);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #6a3a3a, #8a4a4a);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #7a4a3a, #9a5a4a);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #6a4030, #8a5040);"></div>
+            </div>
+            <p class="mt-3 text-xs text-[var(--text-3)] font-mono">превью кадров · кликабельно в Dev Plan</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-5" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">Генерация аудио</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Полноценный аудио-движок: музыка, голос, эффекты, подкасты. Поддерживает клонирование тембра по 10-секундному образцу и многослойную композицию.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">частота</div>
+                <div class="value"><em>48kHz</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">каналы</div>
+                <div class="value">stereo · 5.1</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">голосов</div>
+                <div class="value"><em>340+</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">языки</div>
+                <div class="value">29</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="soft-card p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">воспроизведение</div>
+                <span class="pill-soft">live</span>
+              </div>
+              <div class="waveform" id="waveform"></div>
+              <div class="mt-4 flex items-center justify-between text-xs font-mono text-[var(--text-3)]">
+                <span>00:00:00</span>
+                <span class="text-[var(--accent)]">generated by Pmdrk 1</span>
+                <span>00:03:24</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- News -->
-    <div class="news-section">
-      <div class="section-title">
-        <span>Новости и обновления</span>
-        <a href="#">Все новости →</a>
-      </div>
+  </div>
+</section>
 
-      <div class="news-card" data-news="1">
-        <div class="news-image">
-          <img src="https://picsum.photos/seed/zovbomb-news-editor/440/260.jpg" alt="">
-          <div class="news-tag update">Обновление</div>
-        </div>
-        <div class="news-content">
-          <div class="news-title">КРУПНОЕ ОБНОВЛЕНИЕ: Map Editor and Tons of Updates</div>
-          <div class="news-date">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            15 декабря 2024 · Команда ZoV Studios
-          </div>
-          <div class="news-excerpt">Долгожданное обновление добавляет полноценный редактор карт, новую систему модов, переработанный интерфейс и более 50 новых уровней. Создавайте собственные бомбовые режимы и делитесь ими с сообществом!</div>
-          <div class="news-footer">
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              1,247
-            </div>
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
-              8,532
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- Big text section -->
+<section class="relative py-32 px-6 z-10">
+  <div class="max-w-[1100px] mx-auto">
+    <div class="reveal">
+      <p class="massive-text">
+        Модель, после которой <em>Fable 5</em> и <em>Mythos 5</em> чувствуют себя <em>черновиками</em>.
+      </p>
+    </div>
+  </div>
+</section>
 
-      <div class="news-card" data-news="2">
-        <div class="news-image">
-          <img src="https://picsum.photos/seed/zovbomb-season4/440/260.jpg" alt="">
-          <div class="news-tag event">Событие</div>
-        </div>
-        <div class="news-content">
-          <div class="news-title">Сезон 4: Инферно начинается</div>
-          <div class="news-date">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            1 декабря 2024 · Команда ZoV Studios
-          </div>
-          <div class="news-excerpt">Новый сезон привносит огненные арены, эксклюзивные скины для бомб и обновлённые таблицы лидеров. Сражайтесь за топовые позиции и получите легендарные награды сезона.</div>
-          <div class="news-footer">
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              892
-            </div>
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
-              5,124
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- Test CTA Section -->
+<section id="test" class="relative py-32 px-6 z-10 border-y border-[var(--border-soft)]" style="background: linear-gradient(180deg, var(--bg) 0%, #1a1a18 100%);">
+  <div class="max-w-[1320px] mx-auto">
 
-      <div class="news-card" data-news="3">
-        <div class="news-image">
-          <img src="https://picsum.photos/seed/zovbomb-patch32/440/260.jpg" alt="">
-          <div class="news-tag">Патч</div>
-        </div>
-        <div class="news-content">
-          <div class="news-title">Патч 3.2: Баланс оружия и исправления</div>
-          <div class="news-date">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            20 ноября 2024 · Команда ZoV Studios
-          </div>
-          <div class="news-excerpt">Перебалансировано всё оружие, исправлено более 80 багов, улучшена производительность на слабых ПК. Полный список изменений доступен в официальном блоге разработчиков.</div>
-          <div class="news-footer">
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              445
-            </div>
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
-              3,221
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="news-card" data-news="4">
-        <div class="news-image">
-          <img src="https://picsum.photos/seed/zovbomb-halloween/440/260.jpg" alt="">
-          <div class="news-tag event">Событие</div>
-        </div>
-        <div class="news-content">
-          <div class="news-title">Halloween Event: Проклятые бомбы</div>
-          <div class="news-date">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            31 октября 2024 · Команда ZoV Studios
-          </div>
-          <div class="news-excerpt">Временное событие с эксклюзивными тематическими картами, новыми игровыми механиками и редкими косметическими предметами. Не пропустите — событие продлится только до 15 ноября!</div>
-          <div class="news-footer">
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              2,103
-            </div>
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
-              12,847
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="news-card" data-news="5">
-        <div class="news-image">
-          <img src="https://picsum.photos/seed/zovbomb-tournament/440/260.jpg" alt="">
-          <div class="news-tag">Киберспорт</div>
-        </div>
-        <div class="news-content">
-          <div class="news-title">Зимний чемпионат 2024: призовой фонд $250,000</div>
-          <div class="news-date">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-            15 октября 2024 · Команда ZoV Studios
-          </div>
-          <div class="news-excerpt">Регистрация открыта! Примите участие в крупнейшем турнире года. 64 команды со всего мира разыграют призовой фонд в четверть миллиона долларов. Квалификации начинаются 1 декабря.</div>
-          <div class="news-footer">
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              3,567
-            </div>
-            <div class="news-footer-item">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
-              18,234
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="mb-16 reveal">
+      <div class="section-label mb-3">/ 06 — Тест</div>
+      <div class="section-num">идём тестить имбу</div>
     </div>
 
-    <!-- About -->
-    <div class="about-section">
-      <div class="section-title">
-        <span>Об игре</span>
-        <a href="#">Страница в магазине →</a>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-8 reveal">
+        <h2 class="cta-massive">
+          Идём<br>
+          <em>тестить</em><br>
+          имбу.
+        </h2>
+        <p class="mt-8 text-lg text-[var(--text-2)] max-w-[560px] leading-relaxed">
+          Ссылка ниже ведёт прямо на видео-превью Pmdrk 1. Смотрите, как модель справляется с реальными задачами в реальном времени.
+        </p>
       </div>
-      <div class="about-grid">
-        <div class="about-desc">
-          <p style="margin-bottom:14px;"><strong style="font-size:15px;">ZoVbomb</strong> — это динамичный аркадный экшен с элементами стратегии, где каждый взрыв имеет значение. Сражайтесь на разрушаемых аренах, используйте тактические бомбы и обходите противников в высокооктановых матчах.</p>
-          <p style="margin-bottom:14px;">Играйте в одиночку, с друзьями или против всего мира в кооперативном режиме на 4 игроков. Создавайте собственные карты с новым редактором, загружайте сообщество и участвуйте в еженедельных турнирах.</p>
-          <p>Ключевые особенности:</p>
-          <ul style="margin:8px 0 14px 20px; line-height:1.9;">
-            <li>Более 100 уникальных уровней и 5 биомов</li>
-            <li>Полноценный редактор карт с поддержкой модов</li>
-            <li>Кооператив до 4 игроков онлайн</li>
-            <li>Рейтинговый режим и таблицы лидеров</li>
-            <li>Регулярные сезонные обновления</li>
-            <li>Кастомизация бомб и персонажей</li>
-          </ul>
-          <div style="margin-top:16px;">
-            <span class="tag">Экшен</span>
-            <span class="tag">Аркада</span>
-            <span class="tag">Кооператив</span>
-            <span class="tag">Многопользовательская</span>
-            <span class="tag">Стратегия</span>
-            <span class="tag">Инди</span>
-            <span class="tag">PvP</span>
-            <span class="tag">Турниры</span>
+
+      <div class="lg:col-span-4 reveal" style="transition-delay: 0.15s;">
+        <a href="https://youtu.be/dQw4w9WgXcQ?si=meMK9Q-oQswIOL27" target="_blank" rel="noopener" class="block group">
+          <div class="soft-card p-6 hover:scale-[1.02] transition-transform">
+            <div class="aspect-video rounded-lg overflow-hidden mb-5 relative" style="background: linear-gradient(135deg, #2a1a18 0%, #4a2a20 50%, #2a1a18 100%);">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(218, 119, 86, 0.95);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a1a18">
+                    <polygon points="6 4 20 12 6 20 6 4"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute bottom-3 right-3 text-[10px] font-mono text-[var(--text-2)] bg-black/50 px-2 py-1 rounded">3:33</div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex-1">
+                <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-1.5">видео-превью</div>
+                <div class="font-serif text-lg leading-tight" style="font-variation-settings: 'opsz' 24;">Claude Pmdrk 1 — Live Test</div>
+                <div class="text-xs text-[var(--text-3)] mt-1.5 font-mono">youtube.com</div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round" class="mt-1 group-hover:translate-x-1 transition-transform">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+              </svg>
+            </div>
           </div>
-        </div>
-        <div class="side-info">
-          <div class="side-info-title">Системные требования</div>
-          <div class="side-info-row"><span>ОС</span><span>Windows 10/11</span></div>
-          <div class="side-info-row"><span>Процессор</span><span>Intel i5-8400</span></div>
-          <div class="side-info-row"><span>Память</span><span>8 GB RAM</span></div>
-          <div class="side-info-row"><span>Видео</span><span>GTX 1060</span></div>
-          <div class="side-info-row"><span>DirectX</span><span>Версия 11</span></div>
-          <div class="side-info-row"><span>Место</span><span>15 GB</span></div>
-          <div class="side-info-title" style="margin-top:20px;">Информация</div>
-          <div class="side-info-row"><span>Разработчик</span><span>ZoV Studios</span></div>
-          <div class="side-info-row"><span>Издатель</span><span>ZoV Studios</span></div>
-          <div class="side-info-row"><span>Дата выхода</span><span>12 мар. 2023</span></div>
-          <div class="side-info-row"><span>Текущая версия</span><span>4.0.1</span></div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- ===== RIGHT SIDEBAR ===== -->
-  <aside class="right-sidebar">
-
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">
-        <span>Достижения ZoVbomb</span>
-        <span>0/24</span>
-      </div>
-      <div class="achievement-progress">
-        <span>Прогресс: <strong>0 из 24</strong></span>
-        <span><strong>0%</strong></span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="achProgress" style="width:0%;"></div></div>
-
-      <div style="margin-top:14px;">
-        <div class="achievement">
-          <div class="ach-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2 9 9H2l5.5 4.5L5 21l7-5 7 5-2.5-7.5L22 9h-7z"/></svg>
-          </div>
-          <div class="ach-info">
-            <div class="ach-name">Первый взрыв</div>
-            <div class="ach-desc">Сделайте свой первый взрыв</div>
-          </div>
-        </div>
-        <div class="achievement">
-          <div class="ach-icon locked">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-          </div>
-          <div class="ach-info">
-            <div class="ach-name">Мастер взрывов</div>
-            <div class="ach-desc">Сделайте 1000 взрывов</div>
-          </div>
-        </div>
-        <div class="achievement">
-          <div class="ach-icon locked">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-          </div>
-          <div class="ach-info">
-            <div class="ach-name">Чемпион сезона</div>
-            <div class="ach-desc">Выиграйте 100 матчей</div>
-          </div>
-        </div>
-        <div class="achievement">
-          <div class="ach-icon locked">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-          </div>
-          <div class="ach-info">
-            <div class="ach-name">Картограф</div>
-            <div class="ach-desc">Опубликуйте 10 карт</div>
-          </div>
-        </div>
-      </div>
-      <div class="view-all-link"><a href="#">Просмотреть все достижения</a></div>
-    </div>
-
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">
-        <span>Друзья в ZoVbomb</span>
-        <span>4 / 12</span>
-      </div>
-
-      <div class="friend-card">
-        <div class="friend-avatar">
-          <img src="https://picsum.photos/seed/zovfriend1/64/64.jpg" alt="">
-          <div class="friend-status status-ingame"></div>
-        </div>
-        <div class="friend-info">
-          <div class="friend-name">NukeMaster</div>
-          <div class="friend-game">ZoVbomb · 2ч 14м</div>
-        </div>
-      </div>
-
-      <div class="friend-card">
-        <div class="friend-avatar">
-          <img src="https://picsum.photos/seed/zovfriend2/64/64.jpg" alt="">
-          <div class="friend-status status-ingame"></div>
-        </div>
-        <div class="friend-info">
-          <div class="friend-name">BombSquad_99</div>
-          <div class="friend-game">ZoVbomb · 47м</div>
-        </div>
-      </div>
-
-      <div class="friend-card">
-        <div class="friend-avatar">
-          <img src="https://picsum.photos/seed/zovfriend3/64/64.jpg" alt="">
-          <div class="friend-status status-ingame"></div>
-        </div>
-        <div class="friend-info">
-          <div class="friend-name">ZoVRussian</div>
-          <div class="friend-game">ZoVbomb · 3ч 02м</div>
-        </div>
-      </div>
-
-      <div class="friend-card">
-        <div class="friend-avatar">
-          <img src="https://picsum.photos/seed/zovfriend4/64/64.jpg" alt="">
-          <div class="friend-status status-ingame"></div>
-        </div>
-        <div class="friend-info">
-          <div class="friend-name">Phoenix_GG</div>
-          <div class="friend-game">ZoVbomb · 18м</div>
-        </div>
-      </div>
-
-      <div class="friend-card">
-        <div class="friend-avatar">
-          <img src="https://picsum.photos/seed/zovfriend5/64/64.jpg" alt="">
-          <div class="friend-status status-online"></div>
-        </div>
-        <div class="friend-info">
-          <div class="friend-name">AfkHunter</div>
-          <div class="friend-game dim">В сети</div>
-        </div>
-      </div>
-
-      <div class="friend-card">
-        <div class="friend-avatar">
-          <img src="https://picsum.photos/seed/zovfriend6/64/64.jpg" alt="">
-          <div class="friend-status status-away"></div>
-        </div>
-        <div class="friend-info">
-          <div class="friend-name">SilentBlow</div>
-          <div class="friend-game dim">Отошёл</div>
-        </div>
+        </a>
       </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-section-title">
-        <span>Активность сообщества</span>
-      </div>
+    <!-- Big arrow CTA -->
+    <div class="mt-20 reveal">
+      <a href="https://youtu.be/dQw4w9WgXcQ?si=meMK9Q-oQswIOL27" target="_blank" rel="noopener" class="block group">
+        <div class="flex items-center justify-between gap-6 py-8 border-y border-[var(--border)] hover:border-[var(--accent)] transition-colors">
+          <div class="flex items-center gap-6">
+            <span class="font-mono text-xs text-[var(--text-3)] tracking-widest">ТУТ</span>
+            <span class="font-serif text-3xl md:text-5xl font-light" style="font-variation-settings: 'opsz' 60;">ДА</span>
+            <span class="font-mono text-xs text-[var(--text-3)] tracking-widest">ТУТ</span>
+          </div>
+          <div class="flex items-center gap-4 group-hover:translate-x-2 transition-transform">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1" stroke-linecap="round">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
 
-      <div class="activity-card">
-        <div class="activity-user"><strong>NukeMaster</strong> · 2ч назад</div>
-        <div class="activity-text">Получил достижение <span class="highlight">«Мастер взрывов»</span></div>
+  </div>
+</section>
+
+<!-- Subscribe Section -->
+<section id="subscribe" class="relative py-32 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 07 — Подписка</div>
+        <div class="section-num">самые свежие новости</div>
       </div>
-      <div class="activity-card">
-        <div class="activity-user"><strong>BombSquad_99</strong> · 5ч назад</div>
-        <div class="activity-text">Опубликовал карту <span class="highlight">«Инферно Арена»</span></div>
-      </div>
-      <div class="activity-card">
-        <div class="activity-user"><strong>Phoenix_GG</strong> · 1д назад</div>
-        <div class="activity-text">Достиг <span class="highlight">87 уровня</span> в сезоне 4</div>
-      </div>
-      <div class="activity-card">
-        <div class="activity-user"><strong>ZoVRussian</strong> · 2д назад</div>
-        <div class="activity-text">Выиграл <span class="highlight">турнир «Зимний Блиц»</span></div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Подписаться на <em class="italic" style="color: var(--accent);">свежие новости</em>.
+        </h2>
+        <p class="mt-6 text-lg text-[var(--text-2)] max-w-[640px] leading-relaxed">
+          Telegram-канал, где появляются первые анонсы, ссылки на сборки и закрытые раздачи от PMDRK. Без воды, без рекламы, только по делу.
+        </p>
       </div>
     </div>
 
-  </aside>
-</div>
+    <div class="reveal">
+      <a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="block group">
+        <div class="soft-card p-8 md:p-12 hover:scale-[1.005] transition-transform">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-2">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center" style="background: var(--accent-soft); border: 1px solid rgba(218, 119, 86, 0.2);">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#DA7756">
+                  <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="md:col-span-7">
+              <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-2">telegram-канал</div>
+              <div class="font-serif text-3xl md:text-4xl font-light leading-tight" style="font-variation-settings: 'opsz' 48;">
+                @SCne_scre
+              </div>
+              <div class="mt-2 text-[var(--text-2)] text-sm">
+                Самые свежие новости о Pmdrk 1, Claude и Dev Plan. Первыми узнаёшь о новых сборках и закрытых раздачах.
+              </div>
+            </div>
+            <div class="md:col-span-3 md:text-right">
+              <div class="btn-primary inline-flex">
+                Подписаться
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="group-hover:translate-x-1 transition-transform">
+                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                </svg>
+              </div>
+              <div class="mt-3 text-xs text-[var(--text-3)] font-mono">t.me/SCne_scre</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
 
-<!-- Toast -->
-<div class="toast" id="toast">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="#67c1f5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 14l-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg>
-  <span id="toastText">Запуск ZoVbomb...</span>
-</div>
+    <!-- Additional links -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+      <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="hover-shift block">
+        <div class="soft-card p-6">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">автор модели</div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+          <div class="font-serif text-xl" style="font-variation-settings: 'opsz' 24;">@libpmdrkdv</div>
+          <div class="text-xs text-[var(--text-3)] mt-1">руководитель проекта Pmdrk 1</div>
+        </div>
+      </a>
+      <a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="hover-shift block">
+        <div class="soft-card p-6">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">новостной канал</div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+          <div class="font-serif text-xl" style="font-variation-settings: 'opsz' 24;">@SCne_scre</div>
+          <div class="text-xs text-[var(--text-3)] mt-1">самые свежие новости</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="relative py-16 px-6 z-10 border-t border-[var(--border-soft)]">
+  <div class="max-w-[1320px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+      <div class="md:col-span-5">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg width="22" height="22" viewBox="0 0 60 60" class="star-logo">
+            <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+          </svg>
+          <span class="font-serif text-lg" style="font-variation-settings: 'opsz' 14;">Claude Pmdrk 1</span>
+        </div>
+        <p class="text-sm text-[var(--text-3)] max-w-[400px] leading-relaxed">
+          Новая модель Claude, выпущенная под руководством PMDRK 17 июня 2026 года. Доступна исключительно по подписке Dev Plan.
+        </p>
+      </div>
+      <div class="md:col-span-2">
+        <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-3">разделы</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#story" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">История</a></li>
+          <li><a href="#benchmark" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Бенчмарки</a></li>
+          <li><a href="#devplan" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Dev Plan</a></li>
+          <li><a href="#test" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Тест</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-2">
+        <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-3">ссылки</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">PMDRK</a></li>
+          <li><a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Новости</a></li>
+          <li><a href="https://youtu.be/dQw4w9WgXcQ?si=meMK9Q-oQswIOL27" target="_blank" rel="noopener" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Тест-видео</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-3">
+        <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-3">выпуск</div>
+        <div class="font-serif text-2xl font-light" style="font-variation-settings: 'opsz' 24;">17.06.2026</div>
+        <div class="text-xs text-[var(--text-3)] mt-1 font-mono">по московскому времени</div>
+        <div class="mt-4 text-xs text-[var(--text-3)] font-mono">
+          * AI is only available with<br>
+          &nbsp;&nbsp;a Dev Plan subscription.
+        </div>
+      </div>
+    </div>
+
+    <div class="divider mb-8"></div>
+
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[var(--text-3)] font-mono">
+      <div>© 2026 PMDRK presents · Claude Pmdrk 1</div>
+      <div class="flex items-center gap-6">
+        <span>v 1.0.0</span>
+        <span>build 2026.06.17</span>
+        <span class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] pulse-soft"></span>
+          live
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script>
-// Toast helper
-function showToast(text) {
-  const toast = document.getElementById('toast');
-  document.getElementById('toastText').textContent = text;
-  toast.classList.add('show');
-  clearTimeout(window._toastTimer);
-  window._toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
-}
+  // Reveal animation on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        const counter = entry.target.querySelector('[data-counter]');
+        if (counter && !counter.dataset.counted) {
+          counter.dataset.counted = '1';
+          animateCounter(counter);
+        }
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-// Game list switching
-document.querySelectorAll('.game-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.game-item').forEach(g => g.classList.remove('active'));
-    item.classList.add('active');
-    const name = item.querySelector('.game-name').textContent;
-    if (name !== 'ZoVbomb') {
-      showToast('Игра «' + name + '» недоступна в демо');
-      setTimeout(() => {
-        document.querySelectorAll('.game-item').forEach(g => g.classList.remove('active'));
-        // re-activate ZoVbomb
-        const zov = [...document.querySelectorAll('.game-item')].find(g => g.querySelector('.game-name').textContent === 'ZoVbomb');
-        if (zov) zov.classList.add('active');
-      }, 1200);
-    } else {
-      showToast('ZoVbomb выбрана');
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Counter animation
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.counter);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    const isFloat = target % 1 !== 0;
+
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = target * eased;
+      el.textContent = (isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString('ru-RU')) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = (isFloat ? target.toFixed(1) : target.toLocaleString('ru-RU')) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Tab system
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
+  // Waveform generation
+  const waveform = document.getElementById('waveform');
+  if (waveform) {
+    const bars = 60;
+    let html = '';
+    for (let i = 0; i < bars; i++) {
+      const height = Math.floor(15 + Math.sin(i * 0.4) * 12 + Math.random() * 8);
+      const delay = (i * 0.04).toFixed(2);
+      html += `<div class="bar wave-bar" style="height: ${height}px; animation-delay: ${delay}s;"></div>`;
+    }
+    waveform.innerHTML = html;
+  }
+
+  // Parallax effect on hero
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < 800) {
+        heroTitle.style.transform = `translateY(${scrolled * 0.15}px)`;
+        heroTitle.style.opacity = Math.max(0, 1 - scrolled / 600);
+      }
+    }, { passive: true });
+  }
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Mouse-tracking subtle glow
+  document.addEventListener('mousemove', (e) => {
+    const mouseX = (e.clientX / window.innerWidth - 0.5) * 30;
+    const mouseY = (e.clientY / window.innerHeight - 0.5) * 30;
+    const ambient = document.querySelector('.ambient');
+    if (ambient) {
+      ambient.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
     }
   });
-});
-
-// Tabs
-document.querySelectorAll('.tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    showToast('Вкладка: ' + tab.textContent);
-  });
-});
-
-// Menu items
-document.querySelectorAll('.menu-item').forEach(item => {
-  item.addEventListener('click', () => {
-    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
-    item.classList.add('active');
-  });
-});
-
-// Play button
-const playBtn = document.getElementById('playBtn');
-const playOriginal = playBtn.innerHTML;
-playBtn.addEventListener('click', () => {
-  playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg><span>ЗАПУСК...</span>';
-  showToast('Запуск ZoVbomb...');
-  setTimeout(() => { playBtn.innerHTML = playOriginal; }, 1800);
-});
-
-// Spin keyframe injection
-const style = document.createElement('style');
-style.textContent = '@keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }';
-document.head.appendChild(style);
-
-// Update banner
-document.getElementById('updateBanner').addEventListener('click', () => {
-  showToast('Открываю подробности обновления...');
-});
-
-// News cards
-const newsTitles = {
-  '1': 'Открываю: Map Editor and Tons of Updates',
-  '2': 'Открываю: Сезон 4 — Инферно',
-  '3': 'Открываю: Патч 3.2',
-  '4': 'Открываю: Halloween Event',
-  '5': 'Открываю: Зимний чемпионат 2024'
-};
-document.querySelectorAll('.news-card').forEach(card => {
-  card.addEventListener('click', () => {
-    showToast(newsTitles[card.dataset.news] || 'Открываю новость...');
-  });
-});
-
-// Achievements
-document.querySelectorAll('.achievement').forEach(ach => {
-  ach.addEventListener('click', () => {
-    const name = ach.querySelector('.ach-name').textContent;
-    const isLocked = ach.querySelector('.ach-icon').classList.contains('locked');
-    if (isLocked) {
-      showToast('«' + name + '» — достижение заблокировано');
-    } else {
-      showToast('«' + name + '» — получено!');
-    }
-  });
-});
-
-// Friends
-document.querySelectorAll('.friend-card').forEach(f => {
-  f.addEventListener('click', () => {
-    const name = f.querySelector('.friend-name').textContent;
-    showToast('Открываю профиль: ' + name);
-  });
-});
-
-// Activity
-document.querySelectorAll('.activity-card').forEach(a => {
-  a.addEventListener('click', () => {
-    showToast('Открываю активность...');
-  });
-});
-
-// Tags
-document.querySelectorAll('.tag').forEach(t => {
-  t.addEventListener('click', () => {
-    showToast('Поиск по тегу: ' + t.textContent);
-  });
-});
-
-// Header icons
-document.querySelectorAll('.header-icon').forEach(icon => {
-  icon.addEventListener('click', () => {
-    const title = icon.getAttribute('title');
-    if (title) showToast(title);
-  });
-});
-
-// User pill
-document.querySelector('.user-pill').addEventListener('click', () => {
-  showToast('Профиль: CommanderZov');
-});
-
-// Add button
-document.querySelector('.add-btn').addEventListener('click', () => {
-  showToast('Добавить игру в библиотеку');
-});
-
-// Search
-document.querySelector('.search-box input').addEventListener('input', (e) => {
-  const q = e.target.value.toLowerCase();
-  document.querySelectorAll('.game-item').forEach(g => {
-    const name = g.querySelector('.game-name').textContent.toLowerCase();
-    g.style.display = name.includes(q) ? '' : 'none';
-  });
-});
-
-// View all links
-document.querySelectorAll('.view-all-link a, .section-title a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault();
-    showToast('Загрузка...');
-  });
-});
-
-// Animate achievement progress on load
-setTimeout(() => {
-  document.getElementById('achProgress').style.width = '37%';
-}, 400);
 </script>
 
 </body>
