@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Pmdrk 1 — Выпуск от 17 июня 2026 · PMDRK presents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,400;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root {
+    --bg: #1F1F1E;
+    --bg-2: #262624;
+    --bg-3: #2A2A28;
+    --bg-4: #30302D;
+    --border: #3D3D3A;
+    --border-soft: #2F2F2D;
+    --text: #F5F4EF;
+    --text-2: #B4B0A8;
+    --text-3: #86827B;
+    --text-4: #5C5A55;
+    --accent: #DA7756;
+    --accent-2: #E89070;
+    --accent-3: #B85F3F;
+    --accent-soft: rgba(218, 119, 86, 0.10);
+    --accent-softer: rgba(218, 119, 86, 0.05);
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Instrument Sans', system-ui, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    font-feature-settings: "ss01", "cv11";
+    line-height: 1.5;
+  }
+
+  .font-serif { font-family: var(--serif); }
+  .font-mono { font-family: var(--mono); }
+  .font-sans { font-family: var(--sans); }
+
+  /* Atmosphere */
+  .grain {
+    position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .ambient {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 0%, rgba(218, 119, 86, 0.08), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 85% 25%, rgba(184, 95, 63, 0.06), transparent 60%),
+      radial-gradient(ellipse 50% 30% at 50% 100%, rgba(218, 119, 86, 0.04), transparent 60%);
+  }
+
+  /* Nav */
+  .nav-link {
+    color: var(--text-2); transition: color 0.2s; font-size: 14px; letter-spacing: 0.01em;
+    position: relative;
+  }
+  .nav-link::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+    background: var(--accent); transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-link:hover { color: var(--text); }
+  .nav-link:hover::after { width: 100%; }
+
+  /* Hero */
+  .hero-title {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(64px, 11vw, 180px);
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    font-variation-settings: "opsz" 144;
+  }
+  .hero-title em {
+    font-style: italic; font-weight: 300; color: var(--accent);
+    font-variation-settings: "opsz" 144;
+  }
+
+  /* Section labels */
+  .section-label {
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
+  }
+  .section-num {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--text-3); letter-spacing: 0.2em;
+  }
+
+  /* Cards */
+  .soft-card {
+    background: var(--bg-2); border: 1px solid var(--border-soft);
+    border-radius: 14px; transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .soft-card:hover {
+    border-color: var(--border); background: var(--bg-3);
+    transform: translateY(-2px);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px; background: var(--accent); color: #1a1a18;
+    font-weight: 500; border-radius: 999px; transition: all 0.25s;
+    text-decoration: none; font-size: 14px; letter-spacing: 0.01em;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.1) inset;
+  }
+  .btn-primary:hover {
+    background: var(--accent-2); transform: translateY(-1px);
+    box-shadow: 0 8px 24px -8px rgba(218, 119, 86, 0.4);
+  }
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 26px; background: transparent; color: var(--text);
+    font-weight: 500; border-radius: 999px; border: 1px solid var(--border);
+    transition: all 0.2s; text-decoration: none; font-size: 14px;
+  }
+  .btn-ghost:hover { background: var(--bg-2); border-color: var(--text-3); }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Stats */
+  .stat-big {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(72px, 11vw, 144px);
+    line-height: 0.9; letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 144;
+  }
+  .stat-big em { font-style: italic; color: var(--accent); font-weight: 300; }
+
+  /* Progress bar */
+  .progress-track {
+    height: 4px; background: var(--bg-3); border-radius: 999px; overflow: hidden;
+    position: relative;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent-3), var(--accent));
+    border-radius: 999px; transform-origin: left; transform: scaleX(0);
+    transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .visible .progress-fill { transform: scaleX(var(--p, 0)); }
+
+  /* Animations */
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
+  }
+  .float-anim { animation: float 7s ease-in-out infinite; }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33% { transform: translateY(-14px) translateX(8px); }
+    66% { transform: translateY(6px) translateX(-6px); }
+  }
+  .float-slow { animation: float-slow 12s ease-in-out infinite; }
+
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+  .pulse-soft { animation: pulse-soft 2.4s ease-in-out infinite; }
+
+  @keyframes sparkle-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .sparkle-spin { animation: sparkle-spin 40s linear infinite; }
+  .sparkle-spin-rev { animation: sparkle-spin 60s linear infinite reverse; }
+
+  @keyframes wave {
+    0%, 100% { transform: scaleY(0.4); }
+    50% { transform: scaleY(1); }
+  }
+  .wave-bar { animation: wave 1.4s ease-in-out infinite; transform-origin: center; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-track { animation: marquee 45s linear infinite; display: flex; width: max-content; }
+
+  @keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  .cursor-blink { animation: blink 1.1s step-end infinite; }
+
+  /* Divider */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+  .divider-soft { height: 1px; background: var(--border-soft); }
+
+  /* Pull quote */
+  .pull-quote {
+    font-family: var(--serif); font-style: italic; font-weight: 300;
+    font-size: clamp(32px, 5vw, 64px); line-height: 1.15;
+    letter-spacing: -0.025em; font-variation-settings: "opsz" 144;
+  }
+  .pull-quote em { color: var(--accent); }
+
+  /* Image frame */
+  .img-frame {
+    border: 1px solid var(--border-soft); background: var(--bg-2);
+    border-radius: 16px; overflow: hidden; position: relative;
+  }
+  .img-frame::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 65%, rgba(31, 31, 30, 0.5));
+    pointer-events: none; z-index: 1;
+  }
+  .img-hover { transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .img-hover:hover { transform: scale(1.015); }
+
+  /* Tables */
+  table.bench {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+  }
+  table.bench th {
+    text-align: left; font-weight: 500; color: var(--text-2);
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em;
+    padding: 18px 14px; border-bottom: 1px solid var(--border);
+    font-family: var(--mono);
+  }
+  table.bench td {
+    padding: 20px 14px; border-bottom: 1px solid var(--border-soft);
+    color: var(--text); vertical-align: middle;
+  }
+  table.bench tr { transition: background 0.2s; }
+  table.bench tr:hover td { background: var(--bg-2); }
+  table.bench tr.highlight td { background: var(--accent-softer); }
+  table.bench tr.highlight td:first-child { border-left: 2px solid var(--accent); }
+
+  /* Feature rows */
+  .feature-row {
+    display: grid; grid-template-columns: 56px 1fr 140px;
+    gap: 24px; align-items: center; padding: 28px 0;
+    border-bottom: 1px solid var(--border-soft);
+    transition: padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+  .feature-row::before {
+    content: ''; position: absolute; left: -16px; top: 0; bottom: 0;
+    width: 2px; background: var(--accent); transform: scaleY(0);
+    transform-origin: top; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .feature-row:hover { padding-left: 12px; }
+  .feature-row:hover::before { transform: scaleY(1); }
+
+  .feature-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--bg-2); border: 1px solid var(--border-soft);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); transition: all 0.3s;
+  }
+  .feature-row:hover .feature-icon {
+    background: var(--accent-soft); border-color: var(--accent);
+  }
+
+  /* Pills */
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 5px 12px; background: var(--accent-soft); color: var(--accent);
+    border-radius: 999px; font-size: 11px; font-family: var(--mono);
+    letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1px solid rgba(218, 119, 86, 0.2);
+  }
+  .pill-soft {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; background: var(--bg-2); color: var(--text-2);
+    border-radius: 999px; font-size: 11px; font-family: var(--mono);
+    letter-spacing: 0.05em; border: 1px solid var(--border-soft);
+  }
+
+  /* Methodology */
+  .methodology {
+    font-size: 12px; color: var(--text-3); line-height: 1.7;
+    font-family: var(--mono); letter-spacing: 0.01em;
+  }
+  .methodology strong { color: var(--text-2); font-weight: 500; }
+
+  /* Tab system */
+  .tab-btn {
+    padding: 12px 0; color: var(--text-3); font-size: 14px;
+    border-bottom: 1px solid transparent; cursor: pointer;
+    transition: all 0.2s; background: transparent; border-left: none;
+    border-right: none; border-top: none; font-family: var(--sans);
+    letter-spacing: 0.01em;
+  }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover:not(.active) { color: var(--text-2); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; animation: fadeIn 0.5s ease-out; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Code block */
+  .code-block {
+    background: #18181710; border: 1px solid var(--border-soft);
+    border-radius: 10px; padding: 18px 22px;
+    font-family: var(--mono); font-size: 13px; color: var(--text-2);
+    overflow-x: auto; line-height: 1.7;
+  }
+  .code-block .key { color: var(--accent); }
+  .code-block .str { color: #C8B89E; }
+  .code-block .com { color: var(--text-4); }
+  .code-block .num { color: #B5C8A4; }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg-4); border-radius: 5px; border: 2px solid var(--bg); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--text-4); }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* Inline link */
+  a.inline-link {
+    color: var(--accent); text-decoration: none;
+    border-bottom: 1px solid currentColor; padding-bottom: 1px;
+    transition: opacity 0.2s;
+  }
+  a.inline-link:hover { opacity: 0.7; }
+
+  /* Mark */
+  mark {
+    background: var(--accent-soft); color: var(--accent);
+    padding: 1px 5px; border-radius: 3px;
+    font-family: var(--mono); font-size: 0.9em;
+  }
+
+  /* Drop cap */
+  .drop-cap::first-letter {
+    font-family: var(--serif); font-weight: 400;
+    font-size: 5.5em; line-height: 0.85; float: left;
+    margin: 0.05em 0.12em 0 0; color: var(--accent);
+    font-variation-settings: "opsz" 144;
+  }
+
+  /* Big text section */
+  .massive-text {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(40px, 6vw, 88px); line-height: 1.05;
+    letter-spacing: -0.03em; font-variation-settings: "opsz" 144;
+  }
+  .massive-text em { font-style: italic; color: var(--accent); }
+
+  /* Comparison vis */
+  .bar-row {
+    display: grid; grid-template-columns: 180px 1fr 80px;
+    gap: 16px; align-items: center; padding: 10px 0;
+  }
+  .bar-row .label { font-size: 14px; color: var(--text); }
+  .bar-row .value { font-family: var(--mono); font-size: 13px; color: var(--accent); text-align: right; }
+
+  /* Marquee text */
+  .marquee-text {
+    font-family: var(--serif); font-style: italic;
+    font-size: clamp(40px, 6vw, 80px); font-weight: 300;
+    color: var(--text-3); white-space: nowrap;
+    letter-spacing: -0.02em; padding-right: 60px;
+  }
+  .marquee-text .accent { color: var(--accent); font-style: normal; }
+
+  /* CTA big */
+  .cta-massive {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(48px, 8vw, 120px); line-height: 0.95;
+    letter-spacing: -0.04em; font-variation-settings: "opsz" 144;
+  }
+  .cta-massive em { font-style: italic; color: var(--accent); }
+
+  /* Star logo SVG default */
+  .star-logo { color: var(--accent); }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .feature-row { grid-template-columns: 48px 1fr; }
+    .feature-row .feature-meta { grid-column: 1 / -1; padding-left: 60px; }
+    .bar-row { grid-template-columns: 120px 1fr 60px; gap: 10px; }
+  }
+
+  /* Glow-less hover effect */
+  .hover-shift {
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .hover-shift:hover { transform: translateX(4px); }
+
+  /* Spec list */
+  .spec-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
+    background: var(--border-soft); border: 1px solid var(--border-soft);
+    border-radius: 12px; overflow: hidden;
+  }
+  .spec-item {
+    background: var(--bg); padding: 20px 24px;
+  }
+  .spec-item .label {
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .spec-item .value {
+    font-family: var(--serif); font-size: 22px; color: var(--text);
+    font-weight: 400; letter-spacing: -0.01em;
+  }
+  .spec-item .value em { color: var(--accent); font-style: italic; }
+
+  /* Timeline */
+  .timeline-item {
+    position: relative; padding-left: 32px; padding-bottom: 32px;
+    border-left: 1px solid var(--border-soft);
+  }
+  .timeline-item:last-child { border-left-color: transparent; }
+  .timeline-item::before {
+    content: ''; position: absolute; left: -5px; top: 4px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--bg); border: 1px solid var(--accent);
+  }
+  .timeline-item.active::before {
+    background: var(--accent);
+  }
+
+  /* Audio wave */
+  .waveform {
+    display: flex; align-items: center; gap: 3px; height: 36px;
+  }
+  .waveform .bar {
+    width: 3px; background: var(--accent); border-radius: 2px;
+    transform-origin: center;
+  }
+
+  /* Image grid for image-gen feature */
+  .image-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+    border-radius: 8px; overflow: hidden;
+  }
+  .image-grid > div {
+    aspect-ratio: 1; background: var(--bg-3); position: relative; overflow: hidden;
+  }
+
+  /* Film strip for video feature */
+  .film-strip {
+    display: flex; gap: 4px; padding: 8px;
+    background: var(--bg-3); border-radius: 6px;
+  }
+  .film-frame {
+    flex: 1; aspect-ratio: 16/9; background: var(--bg-4);
+    border-radius: 3px; position: relative;
+  }
+
+  /* Asterisk decoration */
+  .deco-asterisk {
+    color: var(--accent); opacity: 0.5;
+  }
+
+  /* Better focus */
+  *:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+<div class="grain"></div>
+
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl" style="background: rgba(31, 31, 30, 0.72); border-bottom: 1px solid var(--border-soft);">
+  <div class="max-w-[1320px] mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-2.5">
+      <svg width="22" height="22" viewBox="0 0 60 60" class="star-logo float-anim">
+        <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+      </svg>
+      <span class="font-serif text-[15px]" style="font-variation-settings: 'opsz' 14; letter-spacing: -0.01em;">Pmdrk 1</span>
+    </a>
+    <div class="hidden md:flex items-center gap-9">
+      <a href="#story" class="nav-link">История</a>
+      <a href="#benchmark" class="nav-link">Бенчмарки</a>
+      <a href="#devplan" class="nav-link">Dev Plan</a>
+      <a href="#inside" class="nav-link">Возможности</a>
+      <a href="#test" class="nav-link">Тест</a>
+    </div>
+    <a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="btn-ghost text-xs">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+      </svg>
+      Подписаться
+    </a>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="top" class="relative pt-36 pb-24 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <!-- Floating decoration -->
+    <div class="absolute right-0 top-32 opacity-30 pointer-events-none hidden lg:block">
+      <svg width="180" height="180" viewBox="0 0 200 200" class="sparkle-spin">
+        <g fill="none" stroke="#DA7756" stroke-width="0.5">
+          <circle cx="100" cy="100" r="80"/>
+          <circle cx="100" cy="100" r="60"/>
+          <circle cx="100" cy="100" r="40"/>
+          <line x1="20" y1="100" x2="180" y2="100"/>
+          <line x1="100" y1="20" x2="100" y2="180"/>
+          <line x1="44" y1="44" x2="156" y2="156"/>
+          <line x1="156" y1="44" x2="44" y2="156"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3 mb-14 reveal">
+      <span class="pill">
+        <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] pulse-soft"></span>
+        17 июня 2026 · МСК
+      </span>
+      <span class="section-num">/ выпуск 01</span>
+      <span class="pill-soft">под руководством PMDRK</span>
+    </div>
+
+    <h1 class="hero-title reveal" style="transition-delay: 0.08s;">
+      Claude<br>
+      <em>Pmdrk&nbsp;1</em>
+    </h1>
+
+    <div class="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+      <div class="lg:col-span-7 reveal" style="transition-delay: 0.2s;">
+        <p class="text-xl md:text-[26px] text-[var(--text)] leading-[1.35] max-w-[640px]" style="font-family: var(--serif); font-weight: 300; font-style: italic; font-variation-settings: 'opsz' 36; letter-spacing: -0.012em;">
+          Помидор&nbsp;закалабился&nbsp;с&nbsp;Claude. Сегодня PMDRK представляет новую модель — быстрее, откровеннее и мощнее всего, что было до неё.
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3 items-center">
+          <a href="#test" class="btn-primary">
+            Идём тестить имбу
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <a href="#benchmark" class="btn-ghost">Смотреть бенчмарки</a>
+          <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="text-sm text-[var(--text-3)] hover:text-[var(--accent)] transition-colors ml-2 inline-flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
+            @libpmdrkdv
+          </a>
+        </div>
+      </div>
+
+      <div class="lg:col-span-5 reveal" style="transition-delay: 0.32s;">
+        <div class="img-frame img-hover">
+          <div class="relative" style="aspect-ratio: 4/3;">
+            <img src="image.jpg" alt="Claude Pmdrk 1 interface" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('img-missing');">
+            <div class="absolute inset-0 flex items-center justify-center" style="background: linear-gradient(135deg, #1a1a1c 0%, #2a2230 50%, #1f1f1e 100%);">
+              <div class="text-center">
+                <svg width="56" height="56" viewBox="0 0 60 60" class="mx-auto mb-4 float-anim">
+                  <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="#DA7756"/>
+                </svg>
+                <div class="font-serif text-2xl text-[var(--text)]" style="font-weight: 300; letter-spacing: -0.02em;">Claude Pmdrk 1</div>
+                <div class="text-xs text-[var(--text-3)] font-mono mt-2 tracking-wider">image.jpg</div>
+              </div>
+            </div>
+          </div>
+          <div class="absolute bottom-4 left-4 right-4 z-10 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <svg width="14" height="14" viewBox="0 0 60 60" class="star-logo">
+                <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+              </svg>
+              <span class="text-xs text-[var(--text-2)] font-mono tracking-wider">DEV PLAN ONLY</span>
+            </div>
+            <span class="pill-soft text-[10px]" style="background: rgba(31,31,30,0.6); backdrop-filter: blur(8px);">v 1.0.0</span>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-[var(--text-3)] font-mono leading-relaxed">
+          * AI is only available with a Dev Plan subscription.<br>
+          * Помидор закалабился с Claude.
+        </p>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="mt-28 flex items-center gap-3 text-[var(--text-3)] reveal" style="transition-delay: 0.5s;">
+      <div class="w-8 h-px bg-[var(--text-4)]"></div>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      <span class="text-[11px] font-mono uppercase tracking-[0.22em]">прокрутите вниз</span>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee divider -->
+<div class="relative py-8 border-y border-[var(--border-soft)] overflow-hidden" style="background: var(--bg);">
+  <div class="marquee-track">
+    <div class="flex items-center gap-12 pr-12">
+      <span class="marquee-text">лучше чем <span class="accent">Fable 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">лучше чем <span class="accent">Mythos 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">PMDRK presents</span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">17 июня <span class="accent">2026</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+    </div>
+    <div class="flex items-center gap-12 pr-12" aria-hidden="true">
+      <span class="marquee-text">лучше чем <span class="accent">Fable 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">лучше чем <span class="accent">Mythos 5</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">PMDRK presents</span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+      <span class="marquee-text">17 июня <span class="accent">2026</span></span>
+      <span class="deco-asterisk font-serif text-4xl">✲</span>
+    </div>
+  </div>
+</div>
+
+<!-- Story Section -->
+<section id="story" class="relative py-28 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 01 — История</div>
+        <div class="section-num">сегодняшний выпуск</div>
+      </div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Помидор закалабился с Claude. И вот <em class="italic" style="color: var(--accent);">новая модель</em>.
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+      <div class="lg:col-span-2 reveal">
+        <div class="sticky top-32">
+          <div class="section-label mb-4">дата</div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            17 июня<br>
+            <em class="italic" style="color: var(--accent);">2026</em>
+          </div>
+          <div class="mt-6 text-xs text-[var(--text-3)] font-mono">
+            по МСК<br>
+            выпуск 01
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 reveal" style="transition-delay: 0.1s;">
+        <div class="prose-content max-w-[640px]">
+          <p class="drop-cap text-lg leading-[1.75] text-[var(--text)] mb-6">
+            Сегодня, семнадцатого июня две тысячи двадцать шестого года по московскому времени, Anthropic выпускает новую модель Claude. Она была обучена и выпущена под руководством <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="inline-link">PMDRK</a> — и это не просто очередной апдейт. Это другая порода модели.
+          </p>
+          <p class="text-lg leading-[1.75] text-[var(--text-2)] mb-6">
+            Помидор закалабился с Claude. Что это значит — никто толком не объясняет, но все в чате PMDRK уже понимают: предыдущие модели выглядят рядом с Pmdrk 1 как учебный черновик. Включая <mark>Claude Fable 5</mark> и <mark>Claude Mythos 5</mark>.
+          </p>
+          <p class="text-lg leading-[1.75] text-[var(--text-2)] mb-6">
+            Вместе с моделью выходит новый тарифный план — <strong style="color: var(--text);">Dev Plan</strong>. Это не просто подписка. Это комплект: запросы в Claude и Claude Code, база данных приватных серверов Brawl Stars, генерация изображений, видео и аудио. Всё в одном.
+          </p>
+          <div class="my-10 pl-6 border-l-2" style="border-color: var(--accent);">
+            <p class="font-serif italic text-2xl leading-[1.3] text-[var(--text)]" style="font-weight: 300; font-variation-settings: 'opsz' 36;">
+              «Лучше даже чем Fable 5 / Mythos 5. И это только первая версия.»
+            </p>
+            <p class="mt-3 text-sm text-[var(--text-3)] font-mono">— из описания выпуска</p>
+          </div>
+          <p class="text-lg leading-[1.75] text-[var(--text-2)]">
+            Ниже — бенчмарки, спецификации, разбор Dev Plan и ссылка, где можно пойти и потестить имбу самому. Без воды.
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-3 reveal" style="transition-delay: 0.2s;">
+        <div class="soft-card p-6">
+          <div class="section-label mb-4">сводка</div>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Новая модель Claude</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Под руководством PMDRK</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Новый тариф Dev Plan</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">9000 запросов в Claude + Code</span>
+            </li>
+            <li class="flex items-start gap-3">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" stroke-linecap="round" class="mt-0.5 flex-shrink-0">
+                <polyline points="20 6 9 17 4 12"/>
+              </svg>
+              <span class="text-[var(--text-2)]">Превосходит Fable 5 и Mythos 5</span>
+            </li>
+          </ul>
+          <div class="mt-6 pt-6 border-t border-[var(--border-soft)]">
+            <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="text-xs text-[var(--accent)] font-mono inline-flex items-center gap-1.5 hover:opacity-70 transition-opacity">
+              t.me/libpmdrkdv
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-6">
+          <div class="section-label mb-3">таймлайн</div>
+          <div class="timeline-item active">
+            <div class="text-xs text-[var(--accent)] font-mono mb-1">17.06.2026</div>
+            <div class="text-sm text-[var(--text)]">Анонс Pmdrk 1</div>
+          </div>
+          <div class="timeline-item">
+            <div class="text-xs text-[var(--text-3)] font-mono mb-1">ранее</div>
+            <div class="text-sm text-[var(--text-2)]">Claude Mythos 5</div>
+          </div>
+          <div class="timeline-item">
+            <div class="text-xs text-[var(--text-3)] font-mono mb-1">ранее</div>
+            <div class="text-sm text-[var(--text-2)]">Claude Fable 5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pull Quote Section -->
+<section class="relative py-32 px-6 z-10 border-y border-[var(--border-soft)]" style="background: linear-gradient(180deg, var(--bg) 0%, #1c1c1a 100%);">
+  <div class="max-w-[1100px] mx-auto">
+    <div class="reveal">
+      <svg width="40" height="40" viewBox="0 0 60 60" class="star-logo mb-8 opacity-60">
+        <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+      </svg>
+      <p class="pull-quote">
+        Модель лучше <em>даже чем</em> Claude Fable 5 / Mythos 5. И это — <em>только начало</em>.
+      </p>
+      <div class="mt-8 flex items-center gap-4">
+        <div class="w-12 h-px bg-[var(--accent)]"></div>
+        <span class="text-sm font-mono text-[var(--text-3)]">из анонса PMDRK</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Benchmark Section -->
+<section id="benchmark" class="relative py-28 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 02 — Бенчмарки</div>
+        <div class="section-num">производительность</div>
+      </div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Цифры говорят <em class="italic" style="color: var(--accent);">сами за себя</em>.
+        </h2>
+        <p class="mt-6 text-lg text-[var(--text-2)] max-w-[640px] leading-relaxed">
+          Claude Pmdrk 1 превосходит предыдущие модели почти по каждой метрике. Ниже — официальный скриншот бенчмарка и пересобранная таблица с прогресс-барами для наглядности.
+        </p>
+      </div>
+    </div>
+
+    <!-- Benchmark image -->
+    <div class="reveal mb-16">
+      <div class="img-frame">
+        <div class="relative" style="aspect-ratio: 16/9;">
+          <img src="benc.jpg" alt="Claude Pmdrk 1 benchmark table" class="w-full h-full object-cover" onerror="this.style.display='none'; this.parentElement.classList.add('img-missing');">
+          <div class="absolute inset-0 flex items-center justify-center p-12" style="background: linear-gradient(135deg, #1a1a1c 0%, #252220 50%, #1f1f1e 100%);">
+            <div class="text-center max-w-2xl">
+              <div class="text-xs text-[var(--text-3)] font-mono tracking-wider mb-4">benc.jpg</div>
+              <div class="font-serif text-3xl text-[var(--text)] mb-4" style="font-weight: 300;">Benchmark Comparison</div>
+              <div class="grid grid-cols-3 gap-4 text-left">
+                <div class="p-3 border border-[var(--border-soft)] rounded">
+                  <div class="text-xs text-[var(--text-3)] font-mono">SWE-bench Pro</div>
+                  <div class="text-xl text-[var(--accent)] font-mono mt-1">99.4%</div>
+                </div>
+                <div class="p-3 border border-[var(--border-soft)] rounded">
+                  <div class="text-xs text-[var(--text-3)] font-mono">GPQA-VA</div>
+                  <div class="text-xl text-[var(--accent)] font-mono mt-1">2251</div>
+                </div>
+                <div class="p-3 border border-[var(--border-soft)] rounded">
+                  <div class="text-xs text-[var(--text-3)] font-mono">Model</div>
+                  <div class="text-xl text-[var(--text)] font-mono mt-1">Pmdrk 1</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="mt-3 text-xs text-[var(--text-3)] font-mono">benc.jpg — официальный скриншот таблицы сравнения моделей</p>
+    </div>
+
+    <!-- Custom benchmark table -->
+    <div class="reveal">
+      <div class="mb-8 flex items-end justify-between flex-wrap gap-4">
+        <div>
+          <h3 class="font-serif text-2xl font-light" style="font-variation-settings: 'opsz' 36;">
+            Сравнение по задачам
+          </h3>
+          <p class="text-sm text-[var(--text-3)] mt-1 font-mono">источник: внутренние тесты PMDRK · 17.06.2026</p>
+        </div>
+        <div class="flex gap-2">
+          <span class="pill-soft">5 моделей</span>
+          <span class="pill-soft">6 метрик</span>
+        </div>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="bench">
+          <thead>
+            <tr>
+              <th>Модель</th>
+              <th>Agentic Coding<br><span class="text-[var(--text-3)] normal-case tracking-normal">SWE-bench Pro</span></th>
+              <th>Knowledge Work<br><span class="text-[var(--text-3)] normal-case tracking-normal">GPQA-VA</span></th>
+              <th>Reasoning<br><span class="text-[var(--text-3)] normal-case tracking-normal">AIME 2025</span></th>
+              <th>Tool Use<br><span class="text-[var(--text-3)] normal-case tracking-normal">τ²-bench</span></th>
+              <th>Long Context<br><span class="text-[var(--text-3)] normal-case tracking-normal">1M+ recall</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="highlight">
+              <td>
+                <div class="flex items-center gap-2.5">
+                  <svg width="14" height="14" viewBox="0 0 60 60" class="star-logo"><path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/></svg>
+                  <div>
+                    <div class="font-medium">Claude Pmdrk 1</div>
+                    <div class="text-[11px] text-[var(--accent)] font-mono">new · 17.06.26</div>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">99.4%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.994;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">2251</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.94;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">98.2%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.982;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">96.7%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.967;"></div></div>
+              </td>
+              <td>
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-[var(--accent)] font-medium">99.1%</span>
+                </div>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.991;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">Claude Mythos 5</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">prev gen</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">78.2%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.782; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1842</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.77; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">84.6%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.846; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">82.1%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.821; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">91.4%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.914; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">Claude Fable 5</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">prev gen</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">76.5%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.765; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1798</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.75; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">82.9%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.829; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">80.4%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.804; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">89.8%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.898; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">GPT-5 Pro</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">competitor</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">71.3%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.713; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1684</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.70; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">79.4%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.794; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">75.8%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.758; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">84.2%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.842; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div>
+                  <div class="font-medium text-[var(--text-2)]">Gemini 3 Ultra</div>
+                  <div class="text-[11px] text-[var(--text-3)] font-mono">competitor</div>
+                </div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">68.9%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.689; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">1623</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.68; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">76.8%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.768; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">73.2%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.732; background: var(--text-4);"></div></div>
+              </td>
+              <td>
+                <span class="font-mono text-[var(--text-2)]">87.5%</span>
+                <div class="progress-track mt-1.5" style="width: 100px;"><div class="progress-fill" style="--p: 0.875; background: var(--text-4);"></div></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Methodology -->
+    <div class="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-8 reveal">
+      <div class="lg:col-span-3">
+        <div class="section-label">методология</div>
+      </div>
+      <div class="lg:col-span-9">
+        <div class="methodology space-y-3">
+          <p><strong>01.</strong> Все оценки собраны в одинаковых условиях: температура 0, top-p 1, нулевой shot для бенчмарков знаний, few-shot для agentic задач.</p>
+          <p><strong>02.</strong> SWE-bench Pro использует 1400 задач из реальных issue open-source репозиториев. Модель должна сделать коммит, проходящий тесты.</p>
+          <p><strong>03.</strong> GPQA-VA измеряется в баллах 0–2400. Pmdrk 1 установил новый рекорд — 2251, что на 18.4% выше предыдущего лучшего результата.</p>
+          <p><strong>04.</strong> τ²-bench оценивает способность модели использовать инструменты последовательно через 20 шагов. Pmdrk 1 сохраняет связность на 96.7% сценариев.</p>
+          <p><strong>05.</strong> Long Context recall — точность извлечения фактов из контекста 1M+ токенов. У Pmdrk 1: 99.1% при длине 2M токенов.</p>
+          <p><strong>06.</strong> Разница в оценках между Pmdrk 1 и Mythos 5 статистически значима (p &lt; 0.001) на всех бенчмарках.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="relative py-28 px-6 z-10 border-y border-[var(--border-soft)]" style="background: linear-gradient(180deg, #1c1c1a 0%, var(--bg) 100%);">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="mb-16 reveal">
+      <div class="section-label mb-3">/ 03 — В цифрах</div>
+      <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+        Что значит <em class="italic" style="color: var(--accent);">Pmdrk 1</em> на практике.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="reveal">
+        <div class="stat-big" data-counter="99.4" data-suffix="%">0</div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">SWE-bench Pro</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">агентное программирование</div>
+      </div>
+      <div class="reveal" style="transition-delay: 0.1s;">
+        <div class="stat-big" data-counter="2251" data-suffix="">0</div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">GPQA-VA</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">научное рассуждение</div>
+      </div>
+      <div class="reveal" style="transition-delay: 0.2s;">
+        <div class="stat-big" data-counter="9000" data-suffix="">0</div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">запросов в Dev Plan</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">Claude + Claude Code</div>
+      </div>
+      <div class="reveal" style="transition-delay: 0.3s;">
+        <div class="stat-big"><em>2M</em></div>
+        <div class="mt-3 text-sm text-[var(--text-2)] font-mono">контекстное окно</div>
+        <div class="mt-1 text-xs text-[var(--text-3)]">точность 99.1% recall</div>
+      </div>
+    </div>
+
+    <!-- Visual comparison -->
+    <div class="mt-20 reveal">
+      <div class="mb-6 flex items-baseline justify-between flex-wrap gap-2">
+        <h3 class="font-serif text-2xl font-light" style="font-variation-settings: 'opsz' 36;">
+          Отрыв от предыдущего поколения
+        </h3>
+        <span class="text-xs text-[var(--text-3)] font-mono">% от максимума по каждой метрике</span>
+      </div>
+
+      <div class="space-y-1">
+        <div class="bar-row">
+          <div class="label flex items-center gap-2">
+            <svg width="12" height="12" viewBox="0 0 60 60" class="star-logo"><path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/></svg>
+            Claude Pmdrk 1
+          </div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.97;"></div></div>
+          <div class="value">97.6%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">Claude Mythos 5</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.82; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">82.4%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">Claude Fable 5</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.80; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">80.3%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">GPT-5 Pro</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.75; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">75.4%</div>
+        </div>
+        <div class="bar-row">
+          <div class="label" style="color: var(--text-2);">Gemini 3 Ultra</div>
+          <div class="progress-track" style="height: 8px;"><div class="progress-fill" style="--p: 0.73; background: var(--text-4);"></div></div>
+          <div class="value" style="color: var(--text-2);">73.1%</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Dev Plan Section -->
+<section id="devplan" class="relative py-28 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 04 — Dev Plan</div>
+        <div class="section-num">новый тариф</div>
+      </div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Не просто подписка. <em class="italic" style="color: var(--accent);">Целый комплект.</em>
+        </h2>
+        <p class="mt-6 text-lg text-[var(--text-2)] max-w-[680px] leading-relaxed">
+          Вместе с моделью PMDRK выпускает новый тарифный план Dev Plan. Пять составляющих, каждая из которых по отдельности стоила бы подписки.
+        </p>
+      </div>
+    </div>
+
+    <!-- Feature rows -->
+    <div class="reveal">
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="4 17 10 11 4 5"/>
+            <line x1="12" y1="19" x2="20" y2="19"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            9000 запросов в Claude и Claude Code
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Полный лимит на работу с моделью через веб-интерфейс и через терминальный клиент Claude Code. Достаточно для крупных проектов и ежедневных рутин.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">9000</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">запросов</div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="4" width="18" height="6" rx="1"/>
+            <rect x="3" y="14" width="18" height="6" rx="1"/>
+            <circle cx="7" cy="7" r="0.5" fill="currentColor"/>
+            <circle cx="7" cy="17" r="0.5" fill="currentColor"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            База приватных серверов Brawl Stars
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Полная база данных приватных серверов Brawl Stars плюс подробная информация о том, как они создаются. Документация, исходники, конфиги.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">FULL</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">доступ</div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <circle cx="8.5" cy="8.5" r="1.5"/>
+            <polyline points="21 15 16 10 5 21"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            Генерация сексуальных картинок
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            В Dev Plan снимаются стандартные фильтры. Доступна генерация откровенного контента без ограничений, присущих базовым моделям.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">18+</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">без цензуры</div>
+        </div>
+      </div>
+
+      <div class="feature-row">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <polygon points="23 7 16 12 23 17 23 7"/>
+            <rect x="1" y="5" width="15" height="14" rx="2"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            Генерация видео
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Полноценная генерация видеоряда на основе текстового промпта или изображения. Доступна через Dev Plan без отдельных подписок.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">4K</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">до 60 fps</div>
+        </div>
+      </div>
+
+      <div class="feature-row" style="border-bottom: none;">
+        <div class="feature-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+            <path d="M3 12h2M7 8v8M11 4v16M15 8v8M19 10v4M21 12h0"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-serif text-2xl font-light leading-tight" style="font-variation-settings: 'opsz' 36;">
+            Генерация аудио
+          </div>
+          <p class="mt-2 text-[var(--text-2)] text-sm max-w-[560px] leading-relaxed">
+            Создание музыки, голоса, звуковых эффектов и подкастов. Модель справляется с многослойной композицией и клонированием тембра.
+          </p>
+        </div>
+        <div class="feature-meta text-right">
+          <div class="font-mono text-2xl text-[var(--accent)]">48kHz</div>
+          <div class="text-[11px] text-[var(--text-3)] font-mono uppercase tracking-wider">stereo</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Inside Dev Plan - detailed -->
+<section id="inside" class="relative py-28 px-6 z-10 border-t border-[var(--border-soft)]" style="background: linear-gradient(180deg, #1c1c1a 0%, var(--bg) 100%);">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="mb-16 reveal">
+      <div class="section-label mb-3">/ 05 — Внутри тарифа</div>
+      <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+        Что именно <em class="italic" style="color: var(--accent);">вы получаете</em>.
+      </h2>
+      <p class="mt-6 text-lg text-[var(--text-2)] max-w-[680px] leading-relaxed">
+        Детальный разбор каждой составляющей Dev Plan. Переключайтесь между вкладками — каждая показывает конкретику.
+      </p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="reveal">
+      <div class="flex gap-8 border-b border-[var(--border-soft)] mb-12 overflow-x-auto">
+        <button class="tab-btn active" data-tab="tab-1">Запросы</button>
+        <button class="tab-btn" data-tab="tab-2">Brawl Stars</button>
+        <button class="tab-btn" data-tab="tab-3">Изображения</button>
+        <button class="tab-btn" data-tab="tab-4">Видео</button>
+        <button class="tab-btn" data-tab="tab-5">Аудио</button>
+      </div>
+
+      <div id="tab-1" class="tab-panel active">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">9000 запросов в Claude и Claude Code</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Полный пакет запросов, разделённый между веб-интерфейсом Claude и терминальным клиентом Claude Code. Лимит обновляется ежемесячно, остатки переносятся.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">лимит</div>
+                <div class="value"><em>9000</em> / мес</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">контекст</div>
+                <div class="value">до 2M токенов</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">claude code</div>
+                <div class="value">включено</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">rate limit</div>
+                <div class="value">без ограничений</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="code-block">
+              <div class="com"># Установка Claude Code</div>
+              <div><span class="key">$</span> npm install -g @anthropic/claude-code</div>
+              <div class="com"># Авторизация через Dev Plan</div>
+              <div><span class="key">$</span> claude login --plan=dev</div>
+              <div class="com"># Запуск в проекте</div>
+              <div><span class="key">$</span> cd ~/project && claude</div>
+              <div class="com"># Pmdrk 1 активирован</div>
+              <div><span class="str">&gt;</span> <span class="key">model</span>: pmdrk-1</div>
+              <div><span class="str">&gt;</span> <span class="key">context</span>: 2M tokens</div>
+              <div><span class="str">&gt;</span> <span class="key">requests_left</span>: <span class="num">9000</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-2" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">База приватных серверов Brawl Stars</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Полная база данных приватных серверов Brawl Stars, включая конфигурации, исходники серверной части и подробные туториалы по созданию собственных инстансов. Обновляется раз в неделю.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Готовые сборки серверов на 2024/2025/2026 версии</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Инструкция по развертыванию на VPS за 15 минут</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Кастомные brawl-клиенты и патчи</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="2" class="mt-0.5 flex-shrink-0"><polyline points="20 6 9 17 4 12"/></svg>
+                <span class="text-[var(--text-2)]">Закрытый чат поддержки от PMDRK</span>
+              </li>
+            </ul>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="soft-card p-5">
+              <div class="flex items-center justify-between mb-4">
+                <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">серверы</div>
+                <span class="pill-soft">live</span>
+              </div>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">BS-Server v49.231</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">Null's Brawl 2026</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">PMDRK Brawl Alpha</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+                <div class="flex items-center justify-between py-2 border-b border-[var(--border-soft)]">
+                  <span class="text-sm">Lemon Server 2026</span>
+                  <span class="font-mono text-xs text-[var(--text-3)]">queued</span>
+                </div>
+                <div class="flex items-center justify-between py-2">
+                  <span class="text-sm">Retro BS 2018</span>
+                  <span class="font-mono text-xs text-[var(--accent)]">online</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-3" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">Генерация сексуальных картинок</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              В Dev Plan снимаются фильтры безопасности, ограничивающие генерацию откровенного контента. Pmdrk 1 в состоянии детально прорабатывать анатомию, свет и текстуры.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">разрешение</div>
+                <div class="value">до <em>4K</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">фильтры</div>
+                <div class="value">отключены</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">форматы</div>
+                <div class="value">PNG · JPG · WEBP</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">стилей</div>
+                <div class="value"><em>120+</em></div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="image-grid">
+              <div style="background: linear-gradient(135deg, #3a2a26, #5a3a30);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">4K</div></div>
+              <div style="background: linear-gradient(135deg, #2a3a3a, #3a4a4a);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">RAW</div></div>
+              <div style="background: linear-gradient(135deg, #3a2a3a, #5a3a4a);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">PNG</div></div>
+              <div style="background: linear-gradient(135deg, #2a2a3a, #3a3a5a);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">+18</div></div>
+              <div style="background: linear-gradient(135deg, #3a352a, #5a4a30);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">HD</div></div>
+              <div style="background: linear-gradient(135deg, #35302a, #4a4030);"><div class="absolute inset-0 flex items-center justify-center text-[var(--accent)] font-mono text-xs">HQ</div></div>
+            </div>
+            <p class="mt-3 text-xs text-[var(--text-3)] font-mono">безопасная демонстрация · контент доступен только в Dev Plan</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-4" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">Генерация видео</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Текст-в-видео, изображение-в-видео и продление клипов. Pmdrk 1 справляется со сложной хореографией и сохраняет консистентность персонажей на протяжении ролика.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">разрешение</div>
+                <div class="value">до <em>4K</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">fps</div>
+                <div class="value">24 / 30 / 60</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">длина</div>
+                <div class="value">до <em>120с</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">аудио-дубляж</div>
+                <div class="value">включён</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="film-strip">
+              <div class="film-frame" style="background: linear-gradient(135deg, #3a2a26, #5a3a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #4a352a, #6a4a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #5a3a26, #7a4a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #6a3a26, #8a5a30);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #5a3a30, #7a4a3a);"></div>
+            </div>
+            <div class="film-strip mt-1">
+              <div class="film-frame" style="background: linear-gradient(135deg, #4a2a2a, #6a3a3a);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #5a3530, #7a4540);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #6a3a3a, #8a4a4a);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #7a4a3a, #9a5a4a);"></div>
+              <div class="film-frame" style="background: linear-gradient(135deg, #6a4030, #8a5040);"></div>
+            </div>
+            <p class="mt-3 text-xs text-[var(--text-3)] font-mono">превью кадров · кликабельно в Dev Plan</p>
+          </div>
+        </div>
+      </div>
+
+      <div id="tab-5" class="tab-panel">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div class="lg:col-span-7">
+            <h3 class="font-serif text-3xl font-light mb-4" style="font-variation-settings: 'opsz' 48;">Генерация аудио</h3>
+            <p class="text-[var(--text-2)] leading-relaxed mb-6">
+              Полноценный аудио-движок: музыка, голос, эффекты, подкасты. Поддерживает клонирование тембра по 10-секундному образцу и многослойную композицию.
+            </p>
+            <div class="spec-grid">
+              <div class="spec-item">
+                <div class="label">частота</div>
+                <div class="value"><em>48kHz</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">каналы</div>
+                <div class="value">stereo · 5.1</div>
+              </div>
+              <div class="spec-item">
+                <div class="label">голосов</div>
+                <div class="value"><em>340+</em></div>
+              </div>
+              <div class="spec-item">
+                <div class="label">языки</div>
+                <div class="value">29</div>
+              </div>
+            </div>
+          </div>
+          <div class="lg:col-span-5">
+            <div class="soft-card p-6">
+              <div class="flex items-center justify-between mb-4">
+                <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">воспроизведение</div>
+                <span class="pill-soft">live</span>
+              </div>
+              <div class="waveform" id="waveform">
+                <!-- generated by JS -->
+              </div>
+              <div class="mt-4 flex items-center justify-between text-xs font-mono text-[var(--text-3)]">
+                <span>00:00:00</span>
+                <span class="text-[var(--accent)]">generated by Pmdrk 1</span>
+                <span>00:03:24</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Big text section -->
+<section class="relative py-32 px-6 z-10">
+  <div class="max-w-[1100px] mx-auto">
+    <div class="reveal">
+      <p class="massive-text">
+        Модель, после которой <em>Fable 5</em> и <em>Mythos 5</em> чувствуют себя <em>черновиками</em>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Test CTA Section -->
+<section id="test" class="relative py-32 px-6 z-10 border-y border-[var(--border-soft)]" style="background: linear-gradient(180deg, var(--bg) 0%, #1a1a18 100%);">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="mb-16 reveal">
+      <div class="section-label mb-3">/ 06 — Тест</div>
+      <div class="section-num">идём тестить имбу</div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-8 reveal">
+        <h2 class="cta-massive">
+          Идём<br>
+          <em>тестить</em><br>
+          имбу.
+        </h2>
+        <p class="mt-8 text-lg text-[var(--text-2)] max-w-[560px] leading-relaxed">
+          Ссылка ниже ведёт прямо на видео-превью Pmdrk 1. Смотрите, как модель справляется с реальными задачами в реальном времени.
+        </p>
+      </div>
+
+      <div class="lg:col-span-4 reveal" style="transition-delay: 0.15s;">
+        <a href="https://youtu.be/dQw4w9WgXcQ?si=meMK9Q-oQswIOL27" target="_blank" rel="noopener" class="block group">
+          <div class="soft-card p-6 hover:scale-[1.02] transition-transform">
+            <div class="aspect-video rounded-lg overflow-hidden mb-5 relative" style="background: linear-gradient(135deg, #2a1a18 0%, #4a2a20 50%, #2a1a18 100%);">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-16 h-16 rounded-full flex items-center justify-center transition-transform group-hover:scale-110" style="background: rgba(218, 119, 86, 0.95);">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="#1a1a18">
+                    <polygon points="6 4 20 12 6 20 6 4"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="absolute bottom-3 right-3 text-[10px] font-mono text-[var(--text-2)] bg-black/50 px-2 py-1 rounded">3:33</div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="flex-1">
+                <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-1.5">видео-превью</div>
+                <div class="font-serif text-lg leading-tight" style="font-variation-settings: 'opsz' 24;">Claude Pmdrk 1 — Live Test</div>
+                <div class="text-xs text-[var(--text-3)] mt-1.5 font-mono">youtube.com</div>
+              </div>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5" stroke-linecap="round" class="mt-1 group-hover:translate-x-1 transition-transform">
+                <path d="M5 12h14M13 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Big arrow CTA -->
+    <div class="mt-20 reveal">
+      <a href="https://youtu.be/dQw4w9WgXcQ?si=meMK9Q-oQswIOL27" target="_blank" rel="noopener" class="block group">
+        <div class="flex items-center justify-between gap-6 py-8 border-y border-[var(--border)] hover:border-[var(--accent)] transition-colors">
+          <div class="flex items-center gap-6">
+            <span class="font-mono text-xs text-[var(--text-3)] tracking-widest">ТУТ</span>
+            <span class="font-serif text-3xl md:text-5xl font-light" style="font-variation-settings: 'opsz' 60;">ДА</span>
+            <span class="font-mono text-xs text-[var(--text-3)] tracking-widest">ТУТ</span>
+          </div>
+          <div class="flex items-center gap-4 group-hover:translate-x-2 transition-transform">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1" stroke-linecap="round">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Subscribe Section -->
+<section id="subscribe" class="relative py-32 px-6 z-10">
+  <div class="max-w-[1320px] mx-auto">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <div class="lg:col-span-3 reveal">
+        <div class="section-label mb-3">/ 07 — Подписка</div>
+        <div class="section-num">самые свежие новости</div>
+      </div>
+      <div class="lg:col-span-9 reveal" style="transition-delay: 0.1s;">
+        <h2 class="font-serif text-4xl md:text-6xl font-light leading-[1.05] tracking-tight" style="font-variation-settings: 'opsz' 80;">
+          Подписаться на <em class="italic" style="color: var(--accent);>свежие новости</em>.
+        </h2>
+        <p class="mt-6 text-lg text-[var(--text-2)] max-w-[640px] leading-relaxed">
+          Telegram-канал, где появляются первые анонсы, ссылки на сборки и закрытые раздачи от PMDRK. Без воды, без рекламы, только по делу.
+        </p>
+      </div>
+    </div>
+
+    <div class="reveal">
+      <a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="block group">
+        <div class="soft-card p-8 md:p-12 hover:scale-[1.005] transition-transform">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-2">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center" style="background: var(--accent-soft); border: 1px solid rgba(218, 119, 86, 0.2);">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#DA7756">
+                  <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
+                </svg>
+              </div>
+            </div>
+            <div class="md:col-span-7">
+              <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-2">telegram-канал</div>
+              <div class="font-serif text-3xl md:text-4xl font-light leading-tight" style="font-variation-settings: 'opsz' 48;">
+                @SCne_scre
+              </div>
+              <div class="mt-2 text-[var(--text-2)] text-sm">
+                Самые свежие новости о Pmdrk 1, Claude и Dev Plan. Первыми узнаёшь о новых сборках и закрытых раздачах.
+              </div>
+            </div>
+            <div class="md:col-span-3 md:text-right">
+              <div class="btn-primary inline-flex">
+                Подписаться
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="group-hover:translate-x-1 transition-transform">
+                  <path d="M5 12h14M13 5l7 7-7 7"/>
+                </svg>
+              </div>
+              <div class="mt-3 text-xs text-[var(--text-3)] font-mono">t.me/SCne_scre</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <!-- Additional links -->
+    <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 reveal">
+      <a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="hover-shift block">
+        <div class="soft-card p-6">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">автор модели</div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+          <div class="font-serif text-xl" style="font-variation-settings: 'opsz' 24;">@libpmdrkdv</div>
+          <div class="text-xs text-[var(--text-3)] mt-1">руководитель проекта Pmdrk 1</div>
+        </div>
+      </a>
+      <a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="hover-shift block">
+        <div class="soft-card p-6">
+          <div class="flex items-center justify-between mb-3">
+            <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider">новостной канал</div>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA7756" stroke-width="1.5"><path d="M7 17L17 7M7 7h10v10"/></svg>
+          </div>
+          <div class="font-serif text-xl" style="font-variation-settings: 'opsz' 24;">@SCne_scre</div>
+          <div class="text-xs text-[var(--text-3)] mt-1">самые свежие новости</div>
+        </div>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="relative py-16 px-6 z-10 border-t border-[var(--border-soft)]" style="background: #18181700;">
+  <div class="max-w-[1320px] mx-auto">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-12">
+      <div class="md:col-span-5">
+        <div class="flex items-center gap-2.5 mb-4">
+          <svg width="22" height="22" viewBox="0 0 60 60" class="star-logo">
+            <path d="M30 2 L33 27 L58 30 L33 33 L30 58 L27 33 L2 30 L27 27 Z" fill="currentColor"/>
+          </svg>
+          <span class="font-serif text-lg" style="font-variation-settings: 'opsz' 14;">Claude Pmdrk 1</span>
+        </div>
+        <p class="text-sm text-[var(--text-3)] max-w-[400px] leading-relaxed">
+          Новая модель Claude, выпущенная под руководством PMDRK 17 июня 2026 года. Доступна исключительно по подписке Dev Plan.
+        </p>
+      </div>
+      <div class="md:col-span-2">
+        <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-3">разделы</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="#story" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">История</a></li>
+          <li><a href="#benchmark" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Бенчмарки</a></li>
+          <li><a href="#devplan" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Dev Plan</a></li>
+          <li><a href="#test" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Тест</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-2">
+        <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-3">ссылки</div>
+        <ul class="space-y-2 text-sm">
+          <li><a href="https://t.me/libpmdrkdv" target="_blank" rel="noopener" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">PMDRK</a></li>
+          <li><a href="https://t.me/SCne_scre" target="_blank" rel="noopener" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Новости</a></li>
+          <li><a href="https://youtu.be/dQw4w9WgXcQ?si=meMK9Q-oQswIOL27" target="_blank" rel="noopener" class="text-[var(--text-2)] hover:text-[var(--accent)] transition-colors">Тест-видео</a></li>
+        </ul>
+      </div>
+      <div class="md:col-span-3">
+        <div class="text-xs text-[var(--text-3)] font-mono uppercase tracking-wider mb-3">выпуск</div>
+        <div class="font-serif text-2xl font-light" style="font-variation-settings: 'opsz' 24;">17.06.2026</div>
+        <div class="text-xs text-[var(--text-3)] mt-1 font-mono">по московскому времени</div>
+        <div class="mt-4 text-xs text-[var(--text-3)] font-mono">
+          * AI is only available with<br>
+          &nbsp;&nbsp;a Dev Plan subscription.
+        </div>
+      </div>
+    </div>
+
+    <div class="divider mb-8"></div>
+
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-xs text-[var(--text-3)] font-mono">
+      <div>© 2026 PMDRK presents · Claude Pmdrk 1</div>
+      <div class="flex items-center gap-6">
+        <span>v 1.0.0</span>
+        <span>build 2026.06.17</span>
+        <span class="flex items-center gap-2">
+          <span class="w-1.5 h-1.5 rounded-full bg-[var(--accent)] pulse-soft"></span>
+          live
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Reveal animation on scroll
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Trigger counter animation
+        const counter = entry.target.querySelector('[data-counter]');
+        if (counter && !counter.dataset.counted) {
+          counter.dataset.counted = '1';
+          animateCounter(counter);
+        }
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Counter animation
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.counter);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    const isFloat = target % 1 !== 0;
+
+    function tick(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const val = target * eased;
+      el.textContent = (isFloat ? val.toFixed(1) : Math.floor(val).toLocaleString('ru-RU')) + suffix;
+      if (t < 1) requestAnimationFrame(tick);
+      else el.textContent = (isFloat ? target.toFixed(1) : target.toLocaleString('ru-RU')) + suffix;
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // Tab system
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
+  // Waveform generation
+  const waveform = document.getElementById('waveform');
+  if (waveform) {
+    const bars = 60;
+    let html = '';
+    for (let i = 0; i < bars; i++) {
+      const height = Math.floor(15 + Math.sin(i * 0.4) * 12 + Math.random() * 8);
+      const delay = (i * 0.04).toFixed(2);
+      html += `<div class="bar wave-bar" style="height: ${height}px; animation-delay: ${delay}s;"></div>`;
+    }
+    waveform.innerHTML = html;
+  }
+
+  // Parallax effect on hero (subtle)
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < 800) {
+        heroTitle.style.transform = `translateY(${scrolled * 0.15}px)`;
+        heroTitle.style.opacity = Math.max(0, 1 - scrolled / 600);
+      }
+    }, { passive: true });
+  }
+
+  // Smooth focus for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      const target = document.querySelector(href);
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Mouse-tracking subtle glow on ambient
+  let mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 30;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 30;
+    const ambient = document.querySelector('.ambient');
+    if (ambient) {
+      ambient.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+    }
+  });
+</script>
+
+</body>
+</html>
