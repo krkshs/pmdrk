@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Steam — ZoVbomb</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-darkest: #10151c;
+  --bg-dark: #171a21;
+  --bg-main: #1b2838;
+  --bg-card: #2a3f5a;
+  --accent: #67c1f5;
+  --green: #75b022;
+  --green-dark: #588a1b;
+  --green-hover: #a4d007;
+  --text: #c7d5e0;
+  --text-dim: #8f98a0;
+  --text-bright: #ffffff;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--bg-dark);
+  color: var(--text);
+  height: 100vh;
+  overflow: hidden;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============ HEADER ============ */
+.steam-header {
+  background: linear-gradient(to bottom, #171a21 0%, #1b2838 100%);
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  border-bottom: 1px solid #000;
+  gap: 28px;
+  position: relative;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1.5px;
+}
+
+.logo-icon {
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #1a9fff 0%, #13577e 100%);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.menu-items {
+  display: flex;
+  gap: 24px;
+  font-size: 13px;
+}
+
+.menu-item {
+  cursor: pointer;
+  padding: 18px 0;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+  color: #dcdedf;
+  transition: color .2s;
+}
+.menu-item:hover { color: #fff; }
+.menu-item.active { color: #fff; }
+.menu-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px; left: -4px; right: -4px;
+  height: 2px;
+  background: linear-gradient(to right, #1a9fff 0%, #13577e 100%);
+}
+
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 11px;
+  color: #b8b6b6;
+}
+
+.header-icon {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.header-icon:hover { background: rgba(255,255,255,0.08); }
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px 4px 4px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.user-pill:hover { background: rgba(0,0,0,0.5); }
+.user-avatar {
+  width: 26px; height: 26px;
+  background: linear-gradient(135deg, #588a1b, #3a5a0e);
+  border-radius: 2px;
+}
+.user-name { color: #beedfd; font-weight: 500; }
+
+/* ============ APP LAYOUT ============ */
+.app {
+  display: grid;
+  grid-template-columns: 244px 1fr 300px;
+  height: calc(100vh - 52px);
+}
+
+/* ============ GAMES SIDEBAR ============ */
+.games-sidebar {
+  background: var(--bg-main);
+  border-right: 1px solid #000;
+  overflow-y: auto;
+  padding: 12px 0 60px;
+}
+
+.sidebar-header {
+  padding: 6px 16px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sidebar-header-title {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.add-btn {
+  width: 22px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  color: var(--text-dim);
+  border-radius: 2px;
+  transition: all .2s;
+}
+.add-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
+
+.search-box {
+  margin: 0 12px 14px;
+  background: #316373;
+  border-radius: 2px;
+  padding: 6px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.search-box input {
+  background: transparent;
+  border: none;
+  color: var(--text-bright);
+  font-size: 12px;
+  width: 100%;
+  outline: none;
+  font-family: inherit;
+}
+.search-box input::placeholder { color: rgba(255,255,255,0.5); }
+
+.games-list-section-title {
+  padding: 12px 16px 6px;
+  font-size: 10px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.game-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 16px;
+  cursor: pointer;
+  position: relative;
+  font-size: 12px;
+  color: var(--text);
+  transition: background .15s;
+}
+.game-item:hover { background: rgba(255,255,255,0.04); color: #fff; }
+.game-item.active {
+  background: linear-gradient(to right, rgba(103,193,245,0.18) 0%, rgba(103,193,245,0.05) 100%);
+  color: #fff;
+}
+.game-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+}
+
+.game-thumb {
+  width: 34px; height: 34px;
+  background: #000;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.game-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.game-status {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.game-status.playing { background: var(--green-hover); box-shadow: 0 0 6px var(--green-hover); }
+.game-status.update { background: var(--accent); }
+
+/* ============ MAIN CONTENT ============ */
+.main-content {
+  background: var(--bg-main);
+  overflow-y: auto;
+  position: relative;
+}
+
+/* Hero */
+.game-hero {
+  position: relative;
+  height: 460px;
+  background: #000;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://picsum.photos/seed/zovbomb-hero-arena/1600/600.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55) contrast(1.1) saturate(1.2);
+  transform: scale(1.05);
+  animation: heroZoom 30s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  0% { transform: scale(1.05) translateX(0); }
+  100% { transform: scale(1.15) translateX(-2%); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 40%, rgba(255,68,68,0.15) 0%, transparent 50%),
+    linear-gradient(to bottom, rgba(27,40,56,0.3) 0%, rgba(27,40,56,0.6) 60%, rgba(16,21,28,1) 100%);
+}
+
+.hero-content {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 24px 36px 28px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,68,68,0.4);
+  padding: 3px 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #ff6b6b;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.game-title {
+  font-size: 42px;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+  letter-spacing: 2px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.game-title .accent { color: #ff4444; }
+
+.game-subtitle {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+
+/* Play controls */
+.play-controls {
+  display: flex;
+  gap: 4px;
+  align-items: stretch;
+  margin-bottom: 14px;
+  width: fit-content;
+}
+
+.play-button {
+  background: linear-gradient(to bottom, #75b022 5%, #588a1b 95%);
+  color: #d2efa9;
+  border: none;
+  padding: 0 32px;
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: inherit;
+  min-width: 220px;
+  justify-content: center;
+  position: relative;
+  height: 44px;
+  transition: all .15s;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+}
+.play-button:hover {
+  background: linear-gradient(to bottom, #8ed629 5%, #6aa321 95%);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(117,176,34,0.4), inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.play-button:active { transform: translateY(0); }
+
+.play-dropdown {
+  background: linear-gradient(to bottom, #75b022 5%, #588a1b 95%);
+  color: #d2efa9;
+  padding: 0 14px;
+  cursor: pointer;
+  border: none;
+  border-left: 1px solid rgba(0,0,0,0.4);
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  transition: background .15s;
+}
+.play-dropdown:hover { background: #6aa321; color: #fff; }
+
+/* Update banner */
+.update-banner {
+  background: linear-gradient(to right, rgba(103,193,245,0.25) 0%, rgba(103,193,245,0.05) 100%);
+  border-left: 3px solid var(--accent);
+  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  max-width: 700px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.update-banner:hover { background: linear-gradient(to right, rgba(103,193,245,0.35) 0%, rgba(103,193,245,0.1) 100%); }
+
+.update-banner-icon {
+  flex-shrink: 0;
+  width: 32px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(103,193,245,0.2);
+  border-radius: 50%;
+}
+
+.update-banner-text { flex: 1; }
+.update-banner-label {
+  color: var(--accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 11px;
+}
+.update-banner-title { color: #fff; font-weight: 600; margin-top: 2px; }
+
+.update-banner-cta {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+/* Stats bar */
+.game-stats {
+  display: flex;
+  gap: 28px;
+  padding: 14px 36px;
+  background: rgba(0,0,0,0.35);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 12px;
+  align-items: center;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-dim);
+}
+.stat-item strong { color: #fff; font-weight: 600; }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  background: rgba(0,0,0,0.25);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding: 0 36px;
+}
+.tab {
+  padding: 14px 20px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-dim);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  font-weight: 600;
+  transition: all .15s;
+  position: relative;
+}
+.tab:hover { color: #fff; }
+.tab.active {
+  color: #fff;
+  border-bottom-color: var(--accent);
+}
+
+/* ============ NEWS SECTION ============ */
+.news-section {
+  padding: 24px 36px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section-title a {
+  color: var(--accent);
+  font-size: 11px;
+  text-decoration: none;
+  font-weight: 500;
+  text-transform: none;
+}
+.section-title a:hover { color: #fff; }
+
+.news-card {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.06);
+  margin-bottom: 10px;
+  display: flex;
+  gap: 0;
+  cursor: pointer;
+  transition: all .2s;
+  overflow: hidden;
+}
+.news-card:hover {
+  background: rgba(103,193,245,0.08);
+  border-color: rgba(103,193,245,0.3);
+}
+
+.news-image {
+  width: 220px;
+  height: 130px;
+  background: #000;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+.news-image img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s;
+}
+.news-card:hover .news-image img { transform: scale(1.05); }
+
+.news-tag {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: var(--accent);
+  color: #000;
+  padding: 2px 8px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.news-tag.update { background: #ff6b6b; color: #fff; }
+.news-tag.event { background: var(--green-hover); color: #000; }
+
+.news-content {
+  padding: 14px 18px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-title {
+  font-size: 15px;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.news-card:hover .news-title { color: #fff; }
+
+.news-date {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.news-excerpt {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.news-footer {
+  margin-top: 8px;
+  display: flex;
+  gap: 16px;
+  font-size: 11px;
+  color: var(--text-dim);
+}
+.news-footer-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* About section */
+.about-section {
+  padding: 24px 36px 40px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 28px;
+}
+
+.about-desc {
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+}
+.about-desc p { margin-bottom: 12px; }
+.about-desc strong { color: #fff; }
+.about-desc ul { margin: 8px 0 12px 20px; line-height: 1.9; }
+.about-desc li { color: var(--text); }
+.about-desc li::marker { color: var(--accent); }
+
+.side-info {
+  background: rgba(0,0,0,0.35);
+  padding: 18px;
+  font-size: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+  height: fit-content;
+}
+
+.side-info-title {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.side-info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 0;
+  color: var(--text-dim);
+  gap: 12px;
+}
+.side-info-row span:last-child { color: #fff; text-align: right; }
+
+.tag {
+  display: inline-block;
+  background: rgba(103,193,245,0.12);
+  color: var(--accent);
+  padding: 3px 10px;
+  font-size: 11px;
+  margin: 2px 2px 2px 0;
+  cursor: pointer;
+  transition: all .15s;
+  border-radius: 1px;
+}
+.tag:hover { background: var(--accent); color: #000; }
+
+/* ============ RIGHT SIDEBAR ============ */
+.right-sidebar {
+  background: var(--bg-main);
+  border-left: 1px solid #000;
+  overflow-y: auto;
+  padding: 18px 16px 60px;
+}
+
+.sidebar-section { margin-bottom: 28px; }
+
+.sidebar-section-title {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  margin-bottom: 12px;
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.sidebar-section-title span { color: var(--accent); font-size: 13px; }
+
+.achievement-progress {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+.achievement-progress strong { color: #fff; }
+
+.progress-bar {
+  background: #000;
+  height: 8px;
+  position: relative;
+  border-radius: 1px;
+  overflow: hidden;
+}
+.progress-fill {
+  background: linear-gradient(to right, #588a1b 0%, #a4d007 100%);
+  height: 100%;
+  transition: width 1.5s ease-out;
+  position: relative;
+}
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, transparent 50%);
+}
+
+.achievement {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 6px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background .15s;
+}
+.achievement:hover { background: rgba(255,255,255,0.04); }
+
+.ach-icon {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, #588a1b, #3a5a0e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  flex-shrink: 0;
+  border: 1px solid rgba(0,0,0,0.4);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.ach-icon.locked {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  opacity: 0.6;
+}
+
+.ach-info { flex: 1; min-width: 0; }
+.ach-name {
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ach-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.view-all-link {
+  text-align: center;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.view-all-link a {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.view-all-link a:hover { color: #fff; }
+
+/* Friends */
+.friend-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 4px;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background .15s;
+}
+.friend-card:hover { background: rgba(255,255,255,0.04); }
+
+.friend-avatar {
+  width: 34px; height: 34px;
+  background: #000;
+  position: relative;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: visible;
+}
+.friend-avatar img {
+  width: 100%; height: 100%;
+  border-radius: 2px;
+  display: block;
+}
+
+.friend-status {
+  position: absolute;
+  bottom: -2px; right: -2px;
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--bg-main);
+  border-radius: 50%;
+}
+.status-online { background: #588a1b; }
+.status-ingame { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+.status-away { background: #b88a1b; }
+
+.friend-info { flex: 1; min-width: 0; }
+.friend-name {
+  font-size: 12px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.friend-game {
+  font-size: 11px;
+  color: var(--accent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.friend-game.dim { color: var(--text-dim); }
+
+/* Activity feed */
+.activity-card {
+  background: rgba(0,0,0,0.3);
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: all .15s;
+  font-size: 12px;
+}
+.activity-card:hover {
+  background: rgba(103,193,245,0.08);
+  border-left-color: var(--accent);
+}
+.activity-user {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 3px;
+}
+.activity-user strong { color: #beedfd; }
+.activity-text { color: var(--text); line-height: 1.5; }
+.activity-text .highlight { color: var(--accent); }
+
+/* Scrollbars */
+::-webkit-scrollbar { width: 12px; height: 12px; }
+::-webkit-scrollbar-track { background: #1b2838; }
+::-webkit-scrollbar-thumb {
+  background: #2a475e;
+  border: 2px solid #1b2838;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover { background: #3a576e; }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.news-card { animation: fadeUp 0.5s ease-out backwards; }
+.news-card:nth-child(1) { animation-delay: 0.05s; }
+.news-card:nth-child(2) { animation-delay: 0.12s; }
+.news-card:nth-child(3) { animation-delay: 0.19s; }
+.news-card:nth-child(4) { animation-delay: 0.26s; }
+.news-card:nth-child(5) { animation-delay: 0.33s; }
+
+@keyframes playPulse {
+  0%, 100% { box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 0 rgba(164,208,7,0.4); }
+  50% { box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 8px rgba(164,208,7,0); }
+}
+.play-button { animation: playPulse 2.5s infinite; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: linear-gradient(to bottom, #2a3f5a, #1b2838);
+  color: #fff;
+  padding: 12px 20px;
+  border: 1px solid var(--accent);
+  border-radius: 2px;
+  font-size: 13px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  transition: all .3s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="steam-header">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff">
+        <circle cx="12" cy="12" r="10" fill="none" stroke="#fff" stroke-width="2"/>
+        <circle cx="12" cy="12" r="4"/>
+      </svg>
+    </div>
+    STEAM
+  </div>
+  <nav class="menu-items">
+    <span class="menu-item">Магазин</span>
+    <span class="menu-item active">Библиотека</span>
+    <span class="menu-item">Сообщество</span>
+    <span class="menu-item">Профиль</span>
+  </nav>
+  <div class="header-right">
+    <div class="header-icon" title="Поиск">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </div>
+    <div class="header-icon" title="Уведомления">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+    </div>
+    <div class="header-icon" title="Настройки">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </div>
+    <div class="user-pill">
+      <div class="user-avatar"></div>
+      <span class="user-name">CommanderZov</span>
+    </div>
+  </div>
+</header>
+
+<div class="app">
+  <!-- ===== GAMES SIDEBAR ===== -->
+  <aside class="games-sidebar">
+    <div class="sidebar-header">
+      <span class="sidebar-header-title">Библиотека</span>
+      <div class="add-btn" title="Добавить игру">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+      </div>
+    </div>
+    <div class="search-box">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Поиск игры...">
+    </div>
+
+    <div class="games-list-section-title">Все игры (12)</div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1a1a1a"/><path d="M9 9h6v6H9z" fill="#ff4444"/></svg></div>
+      <div class="game-name">Bongo Cat</div>
+      <div class="game-status update"></div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/><path d="M8 8l8 8M16 8l-8 8" stroke="#f4a261" stroke-width="2"/></svg></div>
+      <div class="game-name">Counter-Strike 2</div>
+      <div class="game-status playing"></div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><polygon points="12,2 22,8 22,16 12,22 2,16 2,8" fill="#1a1a1a"/><polygon points="12,7 17,10 17,14 12,17 7,14 7,10" fill="#e63946"/></svg></div>
+      <div class="game-name">Dota 2</div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/><path d="M12 2v20M2 12h20" stroke="#8338ec" stroke-width="2"/></svg></div>
+      <div class="game-name">Elden Ring</div>
+    </div>
+
+    <div class="game-item active">
+      <div class="game-thumb">
+        <svg width="26" height="26" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10" fill="#1a0a0a" stroke="#ff4444" stroke-width="1.5"/>
+          <circle cx="12" cy="12" r="5" fill="#ff4444"/>
+          <circle cx="12" cy="12" r="2" fill="#ffcc00"/>
+          <path d="M12 2L12 5M12 19L12 22M2 12L5 12M19 12L22 12M5 5L7 7M17 17L19 19M5 19L7 17M17 7L19 5" stroke="#ff4444" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="game-name">ZoVbomb</div>
+      <div class="game-status update"></div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="#1a1a1a"/><path d="M8 12l3 3 5-6" stroke="#588a1b" stroke-width="2" fill="none"/></svg></div>
+      <div class="game-name">Rhythia</div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><polygon points="12,2 22,22 2,22" fill="#1a1a1a"/><circle cx="12" cy="16" r="2" fill="#8338ec"/></svg></div>
+      <div class="game-name">Hollow Knight</div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#1a1a1a"/><path d="M12 6v6l4 2" stroke="#fb5607" stroke-width="2" fill="none"/></svg></div>
+      <div class="game-name">Hades</div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="1" fill="#1a1a1a"/><path d="M8 12h8" stroke="#3a86ff" stroke-width="2"/></svg></div>
+      <div class="game-name">Celeste</div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><polygon points="12,3 22,21 2,21" fill="#1a1a1a"/><circle cx="12" cy="15" r="2" fill="#06ffa5"/></svg></div>
+      <div class="game-name">Vampire Survivors</div>
+      <div class="game-status playing"></div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="#1a1a1a"/><path d="M12 8v4M12 16h.01" stroke="#ffbe0b" stroke-width="2"/></svg></div>
+      <div class="game-name">Stardew Valley</div>
+    </div>
+
+    <div class="game-item">
+      <div class="game-thumb"><svg width="22" height="22" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" fill="#1a1a1a"/><path d="M3 3l18 18M21 3L3 21" stroke="#ff006e" stroke-width="2"/></svg></div>
+      <div class="game-name">Risk of Rain 2</div>
+    </div>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="main-content">
+    <div class="game-hero">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+          Эксклюзив в Steam · Сезон 4
+        </div>
+        <h1 class="game-title">ZoV<span class="accent">bomb</span></h1>
+        <div class="game-subtitle">Тактический аркадный экшен о бомбах, стратегии и хаосе</div>
+
+        <div class="play-controls">
+          <button class="play-button" id="playBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            <span>ИГРАТЬ</span>
+          </button>
+          <button class="play-dropdown" title="Дополнительно">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="6,9 18,9 12,16"/></svg>
+          </button>
+        </div>
+
+        <div class="update-banner" id="updateBanner">
+          <div class="update-banner-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#67c1f5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 14l-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg>
+          </div>
+          <div class="update-banner-text">
+            <div class="update-banner-label">Крупное обновление</div>
+            <div class="update-banner-title">Map Editor and Tons of Updates</div>
+          </div>
+          <div class="update-banner-cta">Подробнее →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="game-stats">
+      <div class="stat-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#67c1f5"><circle cx="12" cy="12" r="10"/></svg>
+        <span>В игре сейчас: <strong>12,847</strong></span>
+      </div>
+      <div class="stat-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#588a1b"><circle cx="12" cy="12" r="10"/><path d="M12 7v5l3 3" stroke="#fff" stroke-width="2" fill="none"/></svg>
+        <span>Часов сыграно: <strong>147</strong></span>
+      </div>
+      <div class="stat-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#ffbe0b"><polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9"/></svg>
+        <span>Рейтинг: <strong>97%</strong></span>
+      </div>
+      <div class="stat-item" style="margin-left:auto;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#67c1f5" stroke-width="2"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="4"/></svg>
+        <span>Друзья в игре: <strong>4</strong></span>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab active">Новости</div>
+      <div class="tab">Об игре</div>
+      <div class="tab">Достижения</div>
+      <div class="tab">Скриншоты</div>
+      <div class="tab">Обзоры</div>
+      <div class="tab">Сообщество</div>
+    </div>
+
+    <!-- News -->
+    <div class="news-section">
+      <div class="section-title">
+        <span>Новости и обновления</span>
+        <a href="#">Все новости →</a>
+      </div>
+
+      <div class="news-card" data-news="1">
+        <div class="news-image">
+          <img src="https://picsum.photos/seed/zovbomb-news-editor/440/260.jpg" alt="">
+          <div class="news-tag update">Обновление</div>
+        </div>
+        <div class="news-content">
+          <div class="news-title">КРУПНОЕ ОБНОВЛЕНИЕ: Map Editor and Tons of Updates</div>
+          <div class="news-date">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            15 декабря 2024 · Команда ZoV Studios
+          </div>
+          <div class="news-excerpt">Долгожданное обновление добавляет полноценный редактор карт, новую систему модов, переработанный интерфейс и более 50 новых уровней. Создавайте собственные бомбовые режимы и делитесь ими с сообществом!</div>
+          <div class="news-footer">
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              1,247
+            </div>
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
+              8,532
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card" data-news="2">
+        <div class="news-image">
+          <img src="https://picsum.photos/seed/zovbomb-season4/440/260.jpg" alt="">
+          <div class="news-tag event">Событие</div>
+        </div>
+        <div class="news-content">
+          <div class="news-title">Сезон 4: Инферно начинается</div>
+          <div class="news-date">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            1 декабря 2024 · Команда ZoV Studios
+          </div>
+          <div class="news-excerpt">Новый сезон привносит огненные арены, эксклюзивные скины для бомб и обновлённые таблицы лидеров. Сражайтесь за топовые позиции и получите легендарные награды сезона.</div>
+          <div class="news-footer">
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              892
+            </div>
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
+              5,124
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card" data-news="3">
+        <div class="news-image">
+          <img src="https://picsum.photos/seed/zovbomb-patch32/440/260.jpg" alt="">
+          <div class="news-tag">Патч</div>
+        </div>
+        <div class="news-content">
+          <div class="news-title">Патч 3.2: Баланс оружия и исправления</div>
+          <div class="news-date">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            20 ноября 2024 · Команда ZoV Studios
+          </div>
+          <div class="news-excerpt">Перебалансировано всё оружие, исправлено более 80 багов, улучшена производительность на слабых ПК. Полный список изменений доступен в официальном блоге разработчиков.</div>
+          <div class="news-footer">
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              445
+            </div>
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
+              3,221
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card" data-news="4">
+        <div class="news-image">
+          <img src="https://picsum.photos/seed/zovbomb-halloween/440/260.jpg" alt="">
+          <div class="news-tag event">Событие</div>
+        </div>
+        <div class="news-content">
+          <div class="news-title">Halloween Event: Проклятые бомбы</div>
+          <div class="news-date">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            31 октября 2024 · Команда ZoV Studios
+          </div>
+          <div class="news-excerpt">Временное событие с эксклюзивными тематическими картами, новыми игровыми механиками и редкими косметическими предметами. Не пропустите — событие продлится только до 15 ноября!</div>
+          <div class="news-footer">
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              2,103
+            </div>
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
+              12,847
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-card" data-news="5">
+        <div class="news-image">
+          <img src="https://picsum.photos/seed/zovbomb-tournament/440/260.jpg" alt="">
+          <div class="news-tag">Киберспорт</div>
+        </div>
+        <div class="news-content">
+          <div class="news-title">Зимний чемпионат 2024: призовой фонд $250,000</div>
+          <div class="news-date">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            15 октября 2024 · Команда ZoV Studios
+          </div>
+          <div class="news-excerpt">Регистрация открыта! Примите участие в крупнейшем турнире года. 64 команды со всего мира разыграют призовой фонд в четверть миллиона долларов. Квалификации начинаются 1 декабря.</div>
+          <div class="news-footer">
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              3,567
+            </div>
+            <div class="news-footer-item">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 9V5a3 3 0 0 0-6 0v4M5 9h14l-1 12H6L5 9z"/></svg>
+              18,234
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- About -->
+    <div class="about-section">
+      <div class="section-title">
+        <span>Об игре</span>
+        <a href="#">Страница в магазине →</a>
+      </div>
+      <div class="about-grid">
+        <div class="about-desc">
+          <p style="margin-bottom:14px;"><strong style="font-size:15px;">ZoVbomb</strong> — это динамичный аркадный экшен с элементами стратегии, где каждый взрыв имеет значение. Сражайтесь на разрушаемых аренах, используйте тактические бомбы и обходите противников в высокооктановых матчах.</p>
+          <p style="margin-bottom:14px;">Играйте в одиночку, с друзьями или против всего мира в кооперативном режиме на 4 игроков. Создавайте собственные карты с новым редактором, загружайте сообщество и участвуйте в еженедельных турнирах.</p>
+          <p>Ключевые особенности:</p>
+          <ul style="margin:8px 0 14px 20px; line-height:1.9;">
+            <li>Более 100 уникальных уровней и 5 биомов</li>
+            <li>Полноценный редактор карт с поддержкой модов</li>
+            <li>Кооператив до 4 игроков онлайн</li>
+            <li>Рейтинговый режим и таблицы лидеров</li>
+            <li>Регулярные сезонные обновления</li>
+            <li>Кастомизация бомб и персонажей</li>
+          </ul>
+          <div style="margin-top:16px;">
+            <span class="tag">Экшен</span>
+            <span class="tag">Аркада</span>
+            <span class="tag">Кооператив</span>
+            <span class="tag">Многопользовательская</span>
+            <span class="tag">Стратегия</span>
+            <span class="tag">Инди</span>
+            <span class="tag">PvP</span>
+            <span class="tag">Турниры</span>
+          </div>
+        </div>
+        <div class="side-info">
+          <div class="side-info-title">Системные требования</div>
+          <div class="side-info-row"><span>ОС</span><span>Windows 10/11</span></div>
+          <div class="side-info-row"><span>Процессор</span><span>Intel i5-8400</span></div>
+          <div class="side-info-row"><span>Память</span><span>8 GB RAM</span></div>
+          <div class="side-info-row"><span>Видео</span><span>GTX 1060</span></div>
+          <div class="side-info-row"><span>DirectX</span><span>Версия 11</span></div>
+          <div class="side-info-row"><span>Место</span><span>15 GB</span></div>
+          <div class="side-info-title" style="margin-top:20px;">Информация</div>
+          <div class="side-info-row"><span>Разработчик</span><span>ZoV Studios</span></div>
+          <div class="side-info-row"><span>Издатель</span><span>ZoV Studios</span></div>
+          <div class="side-info-row"><span>Дата выхода</span><span>12 мар. 2023</span></div>
+          <div class="side-info-row"><span>Текущая версия</span><span>4.0.1</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ===== RIGHT SIDEBAR ===== -->
+  <aside class="right-sidebar">
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">
+        <span>Достижения ZoVbomb</span>
+        <span>0/24</span>
+      </div>
+      <div class="achievement-progress">
+        <span>Прогресс: <strong>0 из 24</strong></span>
+        <span><strong>0%</strong></span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="achProgress" style="width:0%;"></div></div>
+
+      <div style="margin-top:14px;">
+        <div class="achievement">
+          <div class="ach-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2 9 9H2l5.5 4.5L5 21l7-5 7 5-2.5-7.5L22 9h-7z"/></svg>
+          </div>
+          <div class="ach-info">
+            <div class="ach-name">Первый взрыв</div>
+            <div class="ach-desc">Сделайте свой первый взрыв</div>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="ach-icon locked">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <div class="ach-info">
+            <div class="ach-name">Мастер взрывов</div>
+            <div class="ach-desc">Сделайте 1000 взрывов</div>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="ach-icon locked">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <div class="ach-info">
+            <div class="ach-name">Чемпион сезона</div>
+            <div class="ach-desc">Выиграйте 100 матчей</div>
+          </div>
+        </div>
+        <div class="achievement">
+          <div class="ach-icon locked">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#888" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="1"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          </div>
+          <div class="ach-info">
+            <div class="ach-name">Картограф</div>
+            <div class="ach-desc">Опубликуйте 10 карт</div>
+          </div>
+        </div>
+      </div>
+      <div class="view-all-link"><a href="#">Просмотреть все достижения</a></div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">
+        <span>Друзья в ZoVbomb</span>
+        <span>4 / 12</span>
+      </div>
+
+      <div class="friend-card">
+        <div class="friend-avatar">
+          <img src="https://picsum.photos/seed/zovfriend1/64/64.jpg" alt="">
+          <div class="friend-status status-ingame"></div>
+        </div>
+        <div class="friend-info">
+          <div class="friend-name">NukeMaster</div>
+          <div class="friend-game">ZoVbomb · 2ч 14м</div>
+        </div>
+      </div>
+
+      <div class="friend-card">
+        <div class="friend-avatar">
+          <img src="https://picsum.photos/seed/zovfriend2/64/64.jpg" alt="">
+          <div class="friend-status status-ingame"></div>
+        </div>
+        <div class="friend-info">
+          <div class="friend-name">BombSquad_99</div>
+          <div class="friend-game">ZoVbomb · 47м</div>
+        </div>
+      </div>
+
+      <div class="friend-card">
+        <div class="friend-avatar">
+          <img src="https://picsum.photos/seed/zovfriend3/64/64.jpg" alt="">
+          <div class="friend-status status-ingame"></div>
+        </div>
+        <div class="friend-info">
+          <div class="friend-name">ZoVRussian</div>
+          <div class="friend-game">ZoVbomb · 3ч 02м</div>
+        </div>
+      </div>
+
+      <div class="friend-card">
+        <div class="friend-avatar">
+          <img src="https://picsum.photos/seed/zovfriend4/64/64.jpg" alt="">
+          <div class="friend-status status-ingame"></div>
+        </div>
+        <div class="friend-info">
+          <div class="friend-name">Phoenix_GG</div>
+          <div class="friend-game">ZoVbomb · 18м</div>
+        </div>
+      </div>
+
+      <div class="friend-card">
+        <div class="friend-avatar">
+          <img src="https://picsum.photos/seed/zovfriend5/64/64.jpg" alt="">
+          <div class="friend-status status-online"></div>
+        </div>
+        <div class="friend-info">
+          <div class="friend-name">AfkHunter</div>
+          <div class="friend-game dim">В сети</div>
+        </div>
+      </div>
+
+      <div class="friend-card">
+        <div class="friend-avatar">
+          <img src="https://picsum.photos/seed/zovfriend6/64/64.jpg" alt="">
+          <div class="friend-status status-away"></div>
+        </div>
+        <div class="friend-info">
+          <div class="friend-name">SilentBlow</div>
+          <div class="friend-game dim">Отошёл</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">
+        <span>Активность сообщества</span>
+      </div>
+
+      <div class="activity-card">
+        <div class="activity-user"><strong>NukeMaster</strong> · 2ч назад</div>
+        <div class="activity-text">Получил достижение <span class="highlight">«Мастер взрывов»</span></div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-user"><strong>BombSquad_99</strong> · 5ч назад</div>
+        <div class="activity-text">Опубликовал карту <span class="highlight">«Инферно Арена»</span></div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-user"><strong>Phoenix_GG</strong> · 1д назад</div>
+        <div class="activity-text">Достиг <span class="highlight">87 уровня</span> в сезоне 4</div>
+      </div>
+      <div class="activity-card">
+        <div class="activity-user"><strong>ZoVRussian</strong> · 2д назад</div>
+        <div class="activity-text">Выиграл <span class="highlight">турнир «Зимний Блиц»</span></div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="#67c1f5"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 14l-4-4 1.4-1.4L11 13.2l4.6-4.6L17 10l-6 6z"/></svg>
+  <span id="toastText">Запуск ZoVbomb...</span>
+</div>
+
+<script>
+// Toast helper
+function showToast(text) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastText').textContent = text;
+  toast.classList.add('show');
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+}
+
+// Game list switching
+document.querySelectorAll('.game-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.game-item').forEach(g => g.classList.remove('active'));
+    item.classList.add('active');
+    const name = item.querySelector('.game-name').textContent;
+    if (name !== 'ZoVbomb') {
+      showToast('Игра «' + name + '» недоступна в демо');
+      setTimeout(() => {
+        document.querySelectorAll('.game-item').forEach(g => g.classList.remove('active'));
+        // re-activate ZoVbomb
+        const zov = [...document.querySelectorAll('.game-item')].find(g => g.querySelector('.game-name').textContent === 'ZoVbomb');
+        if (zov) zov.classList.add('active');
+      }, 1200);
+    } else {
+      showToast('ZoVbomb выбрана');
+    }
+  });
+});
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    showToast('Вкладка: ' + tab.textContent);
+  });
+});
+
+// Menu items
+document.querySelectorAll('.menu-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
+    item.classList.add('active');
+  });
+});
+
+// Play button
+const playBtn = document.getElementById('playBtn');
+const playOriginal = playBtn.innerHTML;
+playBtn.addEventListener('click', () => {
+  playBtn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="animation:spin 1s linear infinite;"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg><span>ЗАПУСК...</span>';
+  showToast('Запуск ZoVbomb...');
+  setTimeout(() => { playBtn.innerHTML = playOriginal; }, 1800);
+});
+
+// Spin keyframe injection
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { from{transform:rotate(0)} to{transform:rotate(360deg)} }';
+document.head.appendChild(style);
+
+// Update banner
+document.getElementById('updateBanner').addEventListener('click', () => {
+  showToast('Открываю подробности обновления...');
+});
+
+// News cards
+const newsTitles = {
+  '1': 'Открываю: Map Editor and Tons of Updates',
+  '2': 'Открываю: Сезон 4 — Инферно',
+  '3': 'Открываю: Патч 3.2',
+  '4': 'Открываю: Halloween Event',
+  '5': 'Открываю: Зимний чемпионат 2024'
+};
+document.querySelectorAll('.news-card').forEach(card => {
+  card.addEventListener('click', () => {
+    showToast(newsTitles[card.dataset.news] || 'Открываю новость...');
+  });
+});
+
+// Achievements
+document.querySelectorAll('.achievement').forEach(ach => {
+  ach.addEventListener('click', () => {
+    const name = ach.querySelector('.ach-name').textContent;
+    const isLocked = ach.querySelector('.ach-icon').classList.contains('locked');
+    if (isLocked) {
+      showToast('«' + name + '» — достижение заблокировано');
+    } else {
+      showToast('«' + name + '» — получено!');
+    }
+  });
+});
+
+// Friends
+document.querySelectorAll('.friend-card').forEach(f => {
+  f.addEventListener('click', () => {
+    const name = f.querySelector('.friend-name').textContent;
+    showToast('Открываю профиль: ' + name);
+  });
+});
+
+// Activity
+document.querySelectorAll('.activity-card').forEach(a => {
+  a.addEventListener('click', () => {
+    showToast('Открываю активность...');
+  });
+});
+
+// Tags
+document.querySelectorAll('.tag').forEach(t => {
+  t.addEventListener('click', () => {
+    showToast('Поиск по тегу: ' + t.textContent);
+  });
+});
+
+// Header icons
+document.querySelectorAll('.header-icon').forEach(icon => {
+  icon.addEventListener('click', () => {
+    const title = icon.getAttribute('title');
+    if (title) showToast(title);
+  });
+});
+
+// User pill
+document.querySelector('.user-pill').addEventListener('click', () => {
+  showToast('Профиль: CommanderZov');
+});
+
+// Add button
+document.querySelector('.add-btn').addEventListener('click', () => {
+  showToast('Добавить игру в библиотеку');
+});
+
+// Search
+document.querySelector('.search-box input').addEventListener('input', (e) => {
+  const q = e.target.value.toLowerCase();
+  document.querySelectorAll('.game-item').forEach(g => {
+    const name = g.querySelector('.game-name').textContent.toLowerCase();
+    g.style.display = name.includes(q) ? '' : 'none';
+  });
+});
+
+// View all links
+document.querySelectorAll('.view-all-link a, .section-title a').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    showToast('Загрузка...');
+  });
+});
+
+// Animate achievement progress on load
+setTimeout(() => {
+  document.getElementById('achProgress').style.width = '37%';
+}, 400);
+</script>
+
+</body>
+</html>
